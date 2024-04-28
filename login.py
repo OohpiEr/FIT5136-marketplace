@@ -36,6 +36,17 @@ class Login:
                             elif not login_attempt:
                                 print(incorrect_login)
                                 self.login_control()
+                            else:
+                                if login_attempt and user_choice_email == customer_email:
+                                    ui_obj.display_customer_menu()
+                                    self.customer_control()
+                                    self.login_control()
+            except FileNotFoundError:
+                print("'users_file.txt' does not exist in system. Please create the file")
+            except IOError:
+                print("Error opening and reading from file. Make sure it exists")
+            except EOFError:
+                print("No data found in the file. Please check contents")
 
 
 
