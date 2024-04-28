@@ -80,3 +80,11 @@ class Login:
             print("Put admin menu choices here")
             if admin_choice[0] == "Q":
                 break
+
+    def customer_control(self):
+        cust_message = "Please choose a Customer action: "
+        cust_choice = input(cust_message)
+        while cust_choice[0] != "Q" or cust_choice[0] == "" or cust_choice == " ":
+            print("Put customer menu choices here")
+            if cust_choice[0] == "Q":
+                break
