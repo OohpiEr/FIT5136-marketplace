@@ -10,7 +10,7 @@ class Login:
         customer_email = "member@student.monash.edu"
         main_choice = "Enter your choice, or 'Q' to Quit: "
         wrong_choice = "Please enter a valid menu option"
-        incorrect_login = "That is not the correct email of password"
+        incorrect_login = "Your entered details are not the correct email or password"
         ui_obj = UserInterface()
         ui_obj.display_landing_page()
         user_choice = input(main_choice)
