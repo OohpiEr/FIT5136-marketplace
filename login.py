@@ -55,3 +55,11 @@ class Login:
             print("Error opening and reading from file. Make sure it exists")
         except EOFError:
             print("No data found in the file. Please check contents")
+
+    def admin_control(self):
+        admin_message = "Please choose an Administrator action: "
+        admin_choice = input(admin_message)
+        while admin_choice[0] != "Q" or admin_choice[0] == "" or admin_choice[0] == " ":
+            print("Put admin menu choices here")
+            if admin_choice[0] == "Q":
+                break
