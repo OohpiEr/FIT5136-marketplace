@@ -10,6 +10,7 @@ class Login:
         customer_email = "member@student.monash.edu"
         main_choice = "Enter your choice, or 'Q' to Quit: "
         wrong_choice = "Please enter a valid menu option"
+        incorrect_login = "That is not the correct email of password"
         ui_obj = UserInterface()
         ui_obj.display_landing_page()
         user_choice = input(main_choice)
@@ -30,6 +31,11 @@ class Login:
                         for lines_2 in all_user_data:
                             if login_attempt and user_choice_email == admin_email:
                                 ui_obj.display_admin_menu()
+                                self.admin_control()
+                                self.login_control()
+                            elif not login_attempt:
+                                print(incorrect_login)
+                                self.login_control()
 
 
 
