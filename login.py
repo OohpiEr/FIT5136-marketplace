@@ -20,6 +20,18 @@ class Login:
             user_choice_email = input("      # Email: ")
             user_choice_password = input("      # Password: ")
             strip_username = user_choice_email.strip(" ")
+            login_attempt = self.login(strip_username, user_choice_password)
+            try:
+                all_user_data = []
+                with open("users_file.txt", "r", encoding="UTF-8") as file_2:
+                    read_all_lines = file_2.read().split("\n")
+                    for lines in read_all_lines:
+                        all_user_data.append(lines)
+                        for lines_2 in all_user_data:
+                            if login_attempt and user_choice_email == admin_email:
+                                ui_obj.display_admin_menu()
+
+
 
     def login(self, username, password):
         admin_email_2 = "admin@merchant.monash.edu"
