@@ -1,8 +1,8 @@
-fp_id,fp_name,fp_brand,fp_desc,fp_qty,fp_og_price,fp_member_price,subcat_id,fp_id,fp_exp_date,fp_ingredients,fp_storage_instructions,fp_allergen_info
+fp_id,fp_name,fp_brand,fp_desc,fp_qty,fp_og_price,fp_member_price,subcat_id,fp_exp_date,fp_ingredients,fp_storage_instructions,fp_allergen_info
 1,A2 Dairy Full Cream Milk,A2,"a2 Milk is no ordinary milk!
 
 It is real milk that may be easier on digestion for some people*.
 
 As the number 1 producer of A1 protein free milk in Australia, our purpose is to pioneer the future of dairy for good.
 
-For more information on the a2 Milk difference visit www.a2milk.com.au",10,6.9,5,11,1,24/05/2024,Milk,Refrigerate below 4C,Contains Milk
+For more information on the a2 Milk difference visit www.a2milk.com.au",10,6.9,5,11,24/05/2024,Milk,Refrigerate below 4C,Contains Milk
