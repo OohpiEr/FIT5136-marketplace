@@ -1,4 +1,4 @@
-from user_interface import UserInterface
+from UserInterface import UserInterface
 
 
 class Login:
