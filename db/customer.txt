@@ -1,0 +1,2 @@
+cust_id,cust_fname,cust_lname,cust_dob,cust_gender,cust_mobile_num,cust_address,cust_credits,user_id
+1,John,Smith,01/01/2000,M,0412345678,"Wellington Rd, Clayton VIC 3800",1000,2

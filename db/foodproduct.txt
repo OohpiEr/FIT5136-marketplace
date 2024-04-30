@@ -1,0 +1,2 @@
+fp_id,fp_exp_date,fp_ingredients,fp_storage_instructions,fp_allergen_info,product_id
+1,24/05/2024,Milk,Refrigerate below 4C,Contains Milk,1

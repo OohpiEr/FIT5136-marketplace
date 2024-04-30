@@ -1,0 +1,12 @@
+subcat_id,subcat_name,cat_id
+1,Computers,1
+2,Audio,1
+3,Fictional,2
+4,Non Fictional,2
+5,Makeup,3
+6,Facial Care,3
+7,Toiletries,4
+8,Dairy,5
+9,Meat,5
+10,Juice,6
+11,Milk,6
