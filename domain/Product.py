@@ -1,5 +1,6 @@
 class Product:
-    def __init__(self, name, brand, description, quantity, sub_category_id, og_price, member_price):
+    def __init__(self, product_id, name, brand, description, quantity, sub_category_id, og_price, member_price):
+        self.__id = product_id
         self.__name = name
         self.__brand = brand
         self.__description = description
@@ -7,6 +8,10 @@ class Product:
         self.__sub_category_id = sub_category_id
         self.__og_price = og_price
         self.__member_price = member_price
+
+    @property
+    def id(self):
+        return self.__id
 
     @property
     def name(self):
