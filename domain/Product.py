@@ -1,23 +1,47 @@
 class Product:
-    def __init__(self, product_id, name, brand, description, quantity, category, subscription, og_price, member_price):
-        self.product_id = product_id
-        self.name = name
-        self.brand = brand
-        self.description = description
-        self.quantity = quantity
-        self.category = category
-        self.subscription = subscription
-        self.og_price = og_price
-        self.member_price = member_price
+    def __init__(self, name, brand, description, quantity, sub_category_id, og_price, member_price):
+        self.__name = name
+        self.__brand = brand
+        self.__description = description
+        self.__quantity = quantity
+        self.__sub_category_id = sub_category_id
+        self.__og_price = og_price
+        self.__member_price = member_price
+
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def brand(self):
+        return self.__brand
+
+    @property
+    def description(self):
+        return self.__description
+
+    @property
+    def quantity(self):
+        return self.__quantity
+
+    @property
+    def sub_category_id(self):
+        return self.__sub_category_id
+
+    @property
+    def og_price(self):
+        return self.__og_price
+
+    @property
+    def member_price(self):
+        return self.__member_price
 
     def __str__(self):
-        return "product_id = {}\nname = {}\nbrand = {}\ndescription = {}\nquantity = {}\ncategory = {}\nsubscription = {}\nog_price = {}\nmember_price = {}".format(
-            self.product_id,
-            self.name,
-            self.brand,
-            self.description,
-            self.quantity,
-            self.category,
-            self.subscription,
-            self.og_price,
-            self.member_price)
+        return "name = {}\nbrand = {}\ndescription = {}\nquantity = {}\ncategory = {}\nog_price = {}\nmember_price = {}".format(
+            self.__name,
+            self.__brand,
+            self.__description,
+            self.__quantity,
+            self.__sub_category_id,
+            self.__og_price,
+            self.__member_price)

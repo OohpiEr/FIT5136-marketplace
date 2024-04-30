@@ -1,4 +1,5 @@
 import csv
+# import Product
 
 
 class DbHelper:
@@ -27,12 +28,12 @@ class DbHelper:
         new_id = int(last_row[0]) + 1
         return new_id
 
-    def add_product(self, name, brand, desc, qty, og_price, member_price, subcat_id):
+    def add_product(self, product):
         with open(f"{self.db_path}/{self.product_tbl_file_name}", 'r+', newline='') as f:
             writer = csv.writer(
                 f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow([self.get_new_id(f), name, brand, desc, qty,
-                            og_price, member_price, subcat_id])
+            writer.writerow([self.get_new_id(f), product.name, product.brand, product.description, product.quantity,
+                            product.og_price, product.member_price, product.sub_category_id])
 
 
 if __name__ == "__main__":
