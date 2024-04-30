@@ -2,5 +2,12 @@ from Login import Login
 
 
 class App:
-    login_obj = Login()
-    login_obj.login_control()
+    def __init__(self):
+        self.login = Login()
+    
+    def start(self):        
+        self.login.login_control()
+    
+if __name__ == "__main__":
+    app = App()
+    app.start()
