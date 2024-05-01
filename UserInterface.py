@@ -1,27 +1,10 @@
-class UserInterface:
-    tab = "     "
-    option_prompt = "PLEASE SELECT AN OPTION"
-    admin_menu_banner = """
-  _||____________________________________________||_
-(__  ____________________________________________  __)
-   ||                                            ||
-   ||              -- MONASH SHOP --             ||
-   ||                                            ||
-   ||                   [ADMIN]                  ||
-   ||                                            ||
-   ||                                            ||
-   ||                                            ||
-  _||____________________________________________||_
-(__  ____________________________________________  __)
-   ||                                            ||"""
+class UserInterface():
+    TAB = "     "
+    OPTION_PROMPT = "PLEASE SELECT AN OPTION"
 
-    def display_admin_menu(self):
-        print(self.admin_menu_banner,"\n\n",self.option_prompt)
-        print("       [1] Add Item")
-        print("       [2] Delete Item")
-        print("       [3] Edit Item")
-        print("       [Q] Back")
-        print("")
+    def display(self):
+        ...
+
 
     def display_customer_menu(self):
         print("  _||____________________________________________||_")
