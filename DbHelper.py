@@ -40,6 +40,7 @@ class DbHelper:
                             og_price, member_price, sub_category_id])
 
             return product
+    
     # def delete_product(self, product):
 
 
