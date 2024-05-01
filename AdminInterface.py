@@ -17,6 +17,9 @@ class AdminInterface(UserInterface):
 
     ADMIN_HOME_OPTIONS = [(1,"Add Item"), (2, "Delete Item"), (3, "Edit Item"), ("Q", "Back")]
     
+    def __init__(self) -> None:
+        super().__init__()
+    
     def __display(self, banner, options, option_prompt):
         print(banner, "\n\n", option_prompt)
         for option in options:
