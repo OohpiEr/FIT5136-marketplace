@@ -29,3 +29,16 @@ if __name__ == "__main__":
     #     6.9,
     #     5,
         # 11)
+    app = App()
+    app.start()
+    a = Admin.Admin()
+    p = Product.Product(
+        "Colgate Total Charcoal Deep Clean Toothpaste",
+        "Colgate",
+        "Colgate Total Antibacterial Fluoride toothpaste has a unique formula that keeps your whole mouth healthy by fighting bacteria on teeth, tongue, cheeks, and gums for 12 hours*. Colgate Total Charcoal Deep Clean, active cleaning formula fights plaque even between teeth and hard to reach spaces",
+        10,
+        6.9,
+        5,
+        11
+    )
+    a.add_product(p)

@@ -24,7 +24,7 @@ class Login:
             login_attempt = self.login(strip_username, user_choice_password)
             try:
                 all_user_data = []
-                with open("users_file.txt", "r", encoding="UTF-8") as file_2:
+                with open("db/user.txt", "r", encoding="UTF-8") as file_2:
                     read_all_lines = file_2.read().split("\n")
                     for lines in read_all_lines:
                         all_user_data.append(lines)
@@ -42,7 +42,7 @@ class Login:
                                     self.customer_control()
                                     self.login_control()
             except FileNotFoundError:
-                print("'users_file.txt' does not exist in system. Please create the file")
+                print("'user.txt' does not exist in system. Please create the file")
             except IOError:
                 print("Error opening and reading from file. Make sure it exists")
             except EOFError:
@@ -57,7 +57,7 @@ class Login:
         customer_password_2 = "Monash1234"
         login_info = []
         try:
-            with open("users_file.txt", "r", encoding="UTF-8") as file_1:
+            with open("db/user.txt", "r", encoding="UTF-8") as file_1:
                 data = file_1.read().split("\n")
                 for lines in data:
                     login_info.append(lines)
@@ -67,7 +67,7 @@ class Login:
                         elif username != admin_email_2 and password != admin_password_2 or username != customer_email_2 and password != customer_password_2:
                             return None
         except FileNotFoundError:
-            print("'users_file.txt' does not exist in system. Please create the file")
+            print("'user.txt' does not exist in system. Please create the file")
         except IOError:
             print("Error opening and reading from file. Make sure it exists")
         except EOFError:
@@ -78,6 +78,7 @@ class Login:
         admin_choice = input(admin_message)
         while admin_choice[0] != "Q" or admin_choice[0] == "" or admin_choice[0] == " ":
             print("Put admin menu choices here")
+            admin_choice = input(admin_message)
             if admin_choice[0] == "Q":
                 break
 
@@ -86,5 +87,6 @@ class Login:
         cust_choice = input(cust_message)
         while cust_choice[0] != "Q" or cust_choice[0] == "" or cust_choice == " ":
             print("Put customer menu choices here")
+            cust_choice = input(cust_message)
             if cust_choice[0] == "Q":
                 break

@@ -1,5 +1,7 @@
 from App import App as app
 
+# from DbHelper import DbHelper as db 
+from app import App as app
 
 class Admin:
     def add_product(self, name, brand, description, quantity,
