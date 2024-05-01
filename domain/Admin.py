@@ -1,5 +1,5 @@
 # from DbHelper import DbHelper as db 
-from App import App as app 
+from app import App as app
 
 class Admin:
     def add_product(self, product):
