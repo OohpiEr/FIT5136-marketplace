@@ -14,7 +14,7 @@ class Login:
         ui_obj = UserInterface()
         ui_obj.display_landing_page()
         user_choice = input(main_choice)
-        if user_choice[0] == "" or user_choice[0] == " ":
+        if user_choice[0] != "1" or user_choice[0] != "Q" or user_choice[0] == "" or user_choice[0] == " ":
             print(wrong_choice)
             user_choice = input(main_choice)
         if user_choice[0] == "1":
