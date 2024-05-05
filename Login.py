@@ -1,4 +1,5 @@
 from UserInterface import UserInterface
+from domain.Admin import Admin
 
 
 class Login:
