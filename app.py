@@ -14,7 +14,7 @@ class App:
         self.user = None
 
     def start(self):
-        # self.login.login_control()
+        self.login.login_control()
         self.ui.display_admin_menu()
 
 
