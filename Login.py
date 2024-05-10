@@ -75,11 +75,21 @@ class Login:
             print("No data found in the file. Please check contents")
 
     def admin_control(self):
+        admin_obj = Admin()
         admin_message = "Please choose an Administrator action: "
         admin_choice = input(admin_message)
         while admin_choice[0] != "Q" or admin_choice[0] == "" or admin_choice[0] == " ":
             print("Put admin menu choices here")
             admin_choice = input(admin_message)
+            if admin_choice[0] == "1":
+                name = input("Please enter the name of the product you wish to add: ")
+                brand = input("Please enter the brand of the product: ")
+                description = input("Please enter the product description: ")
+                quantity = input("Please enter the quantity of the product you wish to add: ")
+                sub_category_id = input("Please enter the sub-category of the item you wish to add: ")
+                og_price = input("Please input the full price for the product: ")
+                member_price = input("Please enter the membership price of the product available to members: ")
+                admin_obj.add_product(name, brand, description, quantity, sub_category_id, og_price, member_price)
             if admin_choice[0] == "Q":
                 break
 
