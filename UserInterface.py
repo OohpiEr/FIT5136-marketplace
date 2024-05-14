@@ -5,8 +5,7 @@ class UserInterface():
     NEWLINE = "\n"
 
     def display_result_msg(self, msg):
-        print(self.NEWLINE, self.NEWLINE, msg, self.NEWLINE,
-              self.NEWLINE)
+        print(self.NEWLINE, self.NEWLINE, msg, self.NEWLINE, self.NEWLINE)
         input("Enter to continue...")
 
     def display_customer_menu(self):

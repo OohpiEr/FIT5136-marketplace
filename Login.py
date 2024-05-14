@@ -1,6 +1,8 @@
 from UserInterface import UserInterface
 from AdminController import AdminController
 from domain.Admin import Admin
+from domain.Customer import Customer
+import csv
 
 
 class Login:
@@ -120,8 +122,18 @@ class Login:
     def customer_control(self):
         cust_message = "Please choose a Customer action: "
         cust_choice = input(cust_message)
+        cust_obj = Customer()
         while cust_choice[0] != "Q" or cust_choice[0] == "" or cust_choice == " ":
             print("Put customer menu choices here")
             cust_choice = input(cust_message)
+            if cust_choice[0] == "1":
+                with open('db/product.txt', 'r') as f3:
+                    reader2 = csv.reader(f3)
+                    for line in reader2:
+                        print("Browsing all products: ")
+                        print(line)
+                        add = input("You may add items to cart whilst browsing. Enter 'Add' to start adding: ")
+                        if add[0] == "Add":
+                            cust_obj.add_product_to_cart()
             if cust_choice[0] == "Q":
                 break

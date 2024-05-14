@@ -31,28 +31,26 @@ class AdminController():
                 if len(admin_choice) == 0:
                     raise UserInputError
 
-                match admin_choice:
-                    case "1":
-                        self.add_product()
-                        display_menu = True
-                    case "2":
-                        self.delete_product()
-                        display_menu = True
-                    case "3":
-                        self.update_product()
-                        display_menu = True
-                    case "q":
-                        return
-                    case _:
-                        display_menu = False
-                        raise UserInputError
+                #match admin_choice:
+                 #   case "1":
+                  #      self.add_product()
+                   #     display_menu = True
+                    #case "2":
+                     #   self.delete_product()
+                      #  display_menu = True
+                    #case "3":
+                     #   self.update_product()
+                      #  display_menu = True
+                    #case "q":
+                     #   return
+                    #case _:
+                     #   display_menu = False
+                      #  raise UserInputError
             except UserInputError as e:
-                print(
-                    "Invalid input. Please enter 1, 2, 3 to perform an action or 'q' to quit.")
+                print("Invalid input. Please enter 1, 2, 3 to perform an action or 'q' to quit.")
 
     def delete_product(self):
-        product_id = input(
-            "Please enter the product ID you wish to delete: ").strip()
+        product_id = input("Please enter the product ID you wish to delete: ").strip()
         msg = ""
 
         try:
@@ -67,27 +65,18 @@ class AdminController():
         self.ui.display_result_msg(msg)
 
     def update_product(self):
-        product_id = input(
-            "Please enter the product ID you wish to update: ").strip()
-        name = input(
-            "Enter new name (leave blank to keep current): ").strip()
-        brand = input(
-            "Enter new brand (leave blank to keep current): ").strip()
-        description = input(
-            "Enter new description (leave blank to keep current): ").strip()
-        quantity = input(
-            "Enter new quantity (leave blank to keep current): ").strip()
-        sub_category_id = input(
-            "Enter new sub-category ID (leave blank to keep current): ").strip()
-        og_price = input(
-            "Enter new original price (leave blank to keep current): ").strip()
-        member_price = input(
-            "Enter new member price (leave blank to keep current): ").strip()
+        product_id = input("Please enter the product ID you wish to update: ").strip()
+        name = input("Enter new name (leave blank to keep current): ").strip()
+        brand = input("Enter new brand (leave blank to keep current): ").strip()
+        description = input("Enter new description (leave blank to keep current): ").strip()
+        quantity = input("Enter new quantity (leave blank to keep current): ").strip()
+        sub_category_id = input("Enter new sub-category ID (leave blank to keep current): ").strip()
+        og_price = input("Enter new original price (leave blank to keep current): ").strip()
+        member_price = input("Enter new member price (leave blank to keep current): ").strip()
 
         try:
             product_id = int(product_id)
-            self.admin.update_product(product_id, name, brand, description, quantity, sub_category_id, og_price,
-                                      member_price)
+            self.admin.update_product(product_id, name, brand, description, quantity, sub_category_id, og_price, member_price)
             msg = f"Product {product_id} updated."
         except RowNotFoundError as e:
             msg = "Product ID not found."
@@ -97,20 +86,14 @@ class AdminController():
         self.ui.display_result_msg(msg)
 
     def add_product(self):
-        name = input(
-            "Please enter the name of the product you wish to add: ").strip()
+        name = input("Please enter the name of the product you wish to add: ").strip()
         brand = input("Please enter the brand of the product: ").strip()
         description = input("Please enter the product description: ").strip()
-        quantity = input(
-            "Please enter the quantity of the product you wish to add: ").strip()
-        sub_category_id = input(
-            "Please enter the sub-category of the item you wish to add: ").strip()
-        og_price = input(
-            "Please input the full price for the product: ").strip()
-        member_price = input(
-            "Please enter the membership price of the product available to members: ").strip()
-        product = self.admin.add_product(name, brand, description, quantity,
-                               sub_category_id, og_price, member_price)
-        
+        quantity = input("Please enter the quantity of the product you wish to add: ").strip()
+        sub_category_id = input("Please enter the sub-category of the item you wish to add: ").strip()
+        og_price = input("Please input the full price for the product: ").strip()
+        member_price = input("Please enter the membership price of the product available to members: ").strip()
+        product = self.admin.add_product(name, brand, description, quantity, sub_category_id, og_price, member_price)
+
         self.ui.display_result_msg(f"Product added:\n" + str(product))
         

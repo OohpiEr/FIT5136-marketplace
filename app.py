@@ -1,7 +1,7 @@
 from Login import Login
 # from DbHelper import DbHelper
 # from domain import Admin
-# from domain import Customer
+from domain.Customer import Customer
 # from UserInterface import UserInterface
 # from AdminInterface import AdminInterface
 # from controller import Controller
@@ -32,8 +32,10 @@ class App:
         #     # print(inp)
 
         # exit()
-        self.login.login_control()
+        ############## add back into function call #############self.login.login_control()
         # self.ui.display_admin_menu()
+        customer_obj = Customer()
+        customer_obj.add_product_to_cart()
 
 
 if __name__ == "__main__":
