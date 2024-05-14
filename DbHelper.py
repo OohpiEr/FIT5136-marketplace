@@ -40,6 +40,48 @@ class DbHelper:
     
     # def delete_product(self, product):
 
+    def update_product(self, product_id, name=None, brand=None, description=None, quantity=None, sub_category_id=None,
+                       og_price=None, member_price=None):
+        # 读取原始数据
+        data = self.get_all_products()
+
+        # 找到要更新的产品在数据中的索引
+        index = None
+        for i, row in enumerate(data):
+            if int(row['id']) == product_id:
+                index = i
+                break
+
+        # 如果找到了产品
+        if index is not None:
+            # 更新产品信息
+            if name is not None:
+                data[index]['name'] = name
+            if brand is not None:
+                data[index]['brand'] = brand
+            if description is not None:
+                data[index]['description'] = description
+            if quantity is not None:
+                data[index]['quantity'] = quantity
+            if sub_category_id is not None:
+                data[index]['sub_category_id'] = sub_category_id
+            if og_price is not None:
+                data[index]['og_price'] = og_price
+            if member_price is not None:
+                data[index]['member_price'] = member_price
+
+            # 写入更新后的数据到文件
+            with open(f"{self.db_path}/{self.product_tbl_file_name}", mode="w", newline='', encoding="UTF-8") as f:
+                fieldnames = data[0].keys()
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
+
+                writer.writeheader()
+                writer.writerows(data)
+
+            print("Product updated successfully.")
+        else:
+            print(f"Product with ID {product_id} not found.")
+
 
 if __name__ == "__main__":
     db = DbHelper()

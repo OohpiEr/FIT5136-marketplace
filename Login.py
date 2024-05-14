@@ -51,6 +51,7 @@ class Login:
 
 
 
+
     def login(self, username, password):
         admin_email_2 = "admin@merchant.monash.edu"
         customer_email_2 = "member@student.monash.edu"
@@ -78,8 +79,11 @@ class Login:
         admin_obj = Admin()
         admin_message = "Please choose an Administrator action: "
         admin_choice = input(admin_message)
-        while admin_choice[0] != "Q" or admin_choice[0] == "" or admin_choice[0] == " ":
-            print("Put admin menu choices here")
+        while admin_choice[0] not in ["1", "2", "3", "Q","q"]:
+            if admin_choice.strip() == "":
+                print("Please enter a valid menu option")
+            else:
+                print("Invalid input. Please enter 1, 2, 3to perform an action or 'Q' to quit.")
             admin_choice = input(admin_message)
             if admin_choice[0] == "1":
                 name = input("Please enter the name of the product you wish to add: ")
@@ -90,7 +94,18 @@ class Login:
                 og_price = input("Please input the full price for the product: ")
                 member_price = input("Please enter the membership price of the product available to members: ")
                 admin_obj.add_product(name, brand, description, quantity, sub_category_id, og_price, member_price)
-            if admin_choice[0] == "Q":
+            elif admin_choice[0] == "3":
+                product_id = input("Please enter the product ID you wish to update: ")
+                name = input("Enter new name (leave blank to keep current): ")
+                brand = input("Enter new brand (leave blank to keep current): ")
+                description = input("Enter new description (leave blank to keep current): ")
+                quantity = input("Enter new quantity (leave blank to keep current): ")
+                sub_category_id = input("Enter new sub-category ID (leave blank to keep current): ")
+                og_price = input("Enter new original price (leave blank to keep current): ")
+                member_price = input("Enter new member price (leave blank to keep current): ")
+                admin_obj.update_product(product_id, name, brand, description, quantity, sub_category_id, og_price,
+                                         member_price)
+            elif admin_choice[0] == "Q":
                 break
 
     def customer_control(self):

@@ -17,29 +17,57 @@ class Product:
     def name(self):
         return self.__name
 
+    @name.setter
+    def name(self, value):
+        self.__name = value
+
     @property
     def brand(self):
         return self.__brand
+
+    @brand.setter
+    def brand(self, value):
+        self.__brand = value
 
     @property
     def description(self):
         return self.__description
 
+    @description.setter
+    def description(self, value):
+        self.__description = value
+
     @property
     def quantity(self):
         return self.__quantity
+
+    @quantity.setter
+    def quantity(self, value):
+        self.__quantity = value
 
     @property
     def sub_category_id(self):
         return self.__sub_category_id
 
+    @sub_category_id.setter
+    def sub_category_id(self, value):
+        self.__sub_category_id = value
+
     @property
     def og_price(self):
         return self.__og_price
 
+    @og_price.setter
+    def og_price(self, value):
+        self.__og_price = value
+
     @property
     def member_price(self):
         return self.__member_price
+
+    @member_price.setter
+    def member_price(self, value):
+        self.__member_price = value
 
     def __str__(self):
         return "name = {}\nbrand = {}\ndescription = {}\nquantity = {}\ncategory = {}\nog_price = {}\nmember_price = {}".format(
