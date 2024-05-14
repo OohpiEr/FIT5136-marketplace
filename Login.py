@@ -12,8 +12,10 @@ class Login:
         main_choice = "Enter your choice, or 'Q' to Quit: "
         wrong_choice = "Please enter a valid menu option"
         incorrect_login = "Your entered details are not the correct email or password"
+        
         ui_obj = UserInterface()
         ui_obj.display_landing_page()
+        
         user_choice = input(main_choice)
         if user_choice[0] != "1" or user_choice[0] != "Q" or user_choice[0] == "" or user_choice[0] == " ":
             print(wrong_choice)
@@ -79,12 +81,14 @@ class Login:
         admin_obj = Admin()
         admin_message = "Please choose an Administrator action: "
         admin_choice = input(admin_message)
-        while admin_choice[0] not in ["1", "2", "3", "Q","q"]:
-            if admin_choice.strip() == "":
+        while admin_choice = input(admin_message):
+            
+            if admin_choice[0] not in ["1", "2", "3", "Q","q"]: 
+                print("Invalid input. Please enter 1, 2, 3 to perform an action or 'Q' to quit.")
+            elif admin_choice.strip() == "":
                 print("Please enter a valid menu option")
             else:
-                print("Invalid input. Please enter 1, 2, 3to perform an action or 'Q' to quit.")
-            admin_choice = input(admin_message)
+        
             if admin_choice[0] == "1":
                 name = input("Please enter the name of the product you wish to add: ")
                 brand = input("Please enter the brand of the product: ")

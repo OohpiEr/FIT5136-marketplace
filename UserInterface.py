@@ -5,7 +5,6 @@ class UserInterface():
     def display(self):
         ...
 
-
     def display_customer_menu(self):
         print("  _||____________________________________________||_")
         print("(__  ____________________________________________  __)")
@@ -61,3 +60,24 @@ class UserInterface():
         print("")
         print("")
         print("    PLEASE LOGIN WITH YOUR USERNAME AND PASSWORD: ")
+
+    def display_admin_menu(self):
+        print("  _||____________________________________________||_")
+        print("(__  ____________________________________________  __)")
+        print("   ||                                            ||")
+        print("   ||              -- MONASH SHOP --             ||")
+        print("   ||                                            ||")
+        print("   ||                   [ADMIN]                  ||")
+        print("   ||                                            ||")
+        print("   ||                                            ||")
+        print("   ||                                            ||")
+        print("  _||____________________________________________||_")
+        print("(__  ____________________________________________  __)")
+        print("   ||                                            ||")
+        print("")
+        print("")
+        print("     PLEASE SELECT AN OPTION")
+        print("       [1] Browse items (delete items)")
+        print("       [2] Add items/categories")
+        print("       [o] Logout")
+        print("")
