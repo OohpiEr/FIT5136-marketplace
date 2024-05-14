@@ -31,13 +31,10 @@ class DbHelper:
     def add_product(self, name, brand, description, quantity, sub_category_id, og_price, member_price):
         with open(f"{self.db_path}/{self.product_tbl_file_name}", 'r+', newline='') as f:
             product_id = self.get_new_id(f)
-            product = Product.Product(
-                product_id, name, brand, description, quantity, sub_category_id, og_price, member_price)
+            product = Product.Product(product_id, name, brand, description, quantity, sub_category_id, og_price, member_price)
 
-            writer = csv.writer(
-                f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow([product_id, name, product.brand, description, quantity,
-                            og_price, member_price, sub_category_id])
+            writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer.writerow([product_id, name, product.brand, description, quantity, sub_category_id, og_price, member_price])
 
             return product
     

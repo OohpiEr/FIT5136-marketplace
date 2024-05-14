@@ -32,6 +32,8 @@ class App:
             # print(inp)
             
         exit()
+        self.login.login_control()
+        self.ui.display_admin_menu()
 
 
 if __name__ == "__main__":
