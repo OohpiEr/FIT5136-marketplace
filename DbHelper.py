@@ -35,7 +35,7 @@ class DbHelper:
     
     @classmethod
     def add_product(self, name, brand, description, quantity, sub_category_id, og_price, member_price):
-        with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", 'r+') as f:
+        with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", 'r+',newline="") as f:
             product_id = self.__get_new_id(f)
             product = Product.Product(product_id, name, brand, description, quantity, sub_category_id, og_price, member_price)
 
@@ -47,14 +47,21 @@ class DbHelper:
     @classmethod
     def delete_product(self, product_id):
         deleted = False
-        with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", 'r+') as f:
-            lines = f.readlines()
-            f.seek(0)
-            for line in lines:
+        prod_list = []
+        with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", 'r+', newline='') as f:
+            reader = csv.reader(f, delimiter=',')
+            # lines = f.readlines()
+            for line in reader:
                 if line[0] != str(product_id):
-                    f.write(line)
+                    prod_list.append(line)
+                    # f.write(line)
                 else:
                     deleted = True
+            
+            f.seek(0)
+            writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer.writerows(prod_list)
+            
             f.truncate()
         
         if not deleted:
@@ -107,6 +114,6 @@ class DbHelper:
 if __name__ == "__main__":
     db = DbHelper()
     # p = Product.Product(7, "name", "brand", "description", 10, 6.9, 5, 11)
-    db.update_product(7)
+    db.delete_product(5)
     # db.add_product("Colgate Total Charcoal Deep Clean Toothpaste", "Colgate",
-    #                "Colgate Total Antibacterial Fluoride toothpaste has a unique formula that keeps your whole mouth healthy by fighting bacteria on teeth, tongue, cheeks, and gums for 12 hours*. Colgate Total Charcoal Deep Clean, active cleaning formula fights plaque even between teeth and hard to reach spaces", 10, 6.9, 5, 11)
+                #    "Colgate Total Antibacterial Fluoride toothpaste has a unique formula that keeps your whole mouth healthy by fighting bacteria on teeth, tongue, cheeks, and gums for 12 hours*. Colgate Total Charcoal Deep Clean, active cleaning formula fights plaque even between teeth and hard to reach spaces", 10, 6.9, 5, 11)

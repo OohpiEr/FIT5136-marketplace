@@ -4,7 +4,7 @@ from DbHelper import DbHelper as db
 
 class Admin:
     def add_product(self, name, brand, description, quantity, sub_category_id, og_price, member_price):
-        db.add_product(name, brand, description, quantity,
+        return db.add_product(name, brand, description, quantity,
                        sub_category_id, og_price, member_price)
 
     def delete_product(self, product_id):

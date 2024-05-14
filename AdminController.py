@@ -109,5 +109,8 @@ class AdminController():
             "Please input the full price for the product: ").strip()
         member_price = input(
             "Please enter the membership price of the product available to members: ").strip()
-        self.admin.add_product(name, brand, description, quantity,
+        product = self.admin.add_product(name, brand, description, quantity,
                                sub_category_id, og_price, member_price)
+        
+        self.ui.display_result_msg(f"Product added:\n" + str(product))
+        
