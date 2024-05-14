@@ -1,6 +1,7 @@
 class UserInterface():
     TAB = "     "
     OPTION_PROMPT = "PLEASE SELECT AN OPTION"
+    INPUT_PROMPT = "INPUT:"
 
     def display(self):
         ...
