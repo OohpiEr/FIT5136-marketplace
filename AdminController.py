@@ -1,5 +1,6 @@
 from UserInputError import UserInputError
 from AdminInterface import AdminInterface
+from RowNotFoundError import RowNotFoundError
 from domain.Admin import Admin
 
 
@@ -18,9 +19,12 @@ class AdminController():
 
     def admin_control(self):
         # [("1","Add Item"), ("2", "Delete Item"), ("3", "Edit Item"), ("q", "Quit")]
-        self.ui.display_home()
         quit_flag = False
+        display_menu = True
         while not quit_flag:
+            if display_menu:
+                self.ui.display_home()
+
             admin_choice = input().strip().lower()
 
             try:
@@ -30,18 +34,37 @@ class AdminController():
                 match admin_choice:
                     case "1":
                         self.add_product()
+                        display_menu = True
                     case "2":
-                        # Delete Item
-                        pass
+                        self.delete_product()
+                        display_menu = True
                     case "3":
                         self.update_product()
+                        display_menu = True
                     case "q":
                         return
                     case _:
+                        display_menu = False
                         raise UserInputError
             except UserInputError as e:
                 print(
                     "Invalid input. Please enter 1, 2, 3 to perform an action or 'q' to quit.")
+
+    def delete_product(self):
+        product_id = input(
+            "Please enter the product ID you wish to delete: ").strip()
+        msg = ""
+
+        try:
+            product_id = int(product_id)
+            self.admin.delete_product(product_id)
+            msg = f"Product {product_id} deleted."
+        except RowNotFoundError as e:
+            msg = "Product ID not found."
+        except Exception as e:
+            msg = "Invalid product ID."
+
+        self.ui.display_result_msg(msg)
 
     def update_product(self):
         product_id = input(
@@ -60,8 +83,18 @@ class AdminController():
             "Enter new original price (leave blank to keep current): ").strip()
         member_price = input(
             "Enter new member price (leave blank to keep current): ").strip()
-        self.admin.update_product(product_id, name, brand, description, quantity, sub_category_id, og_price,
-                                  member_price)
+
+        try:
+            product_id = int(product_id)
+            self.admin.update_product(product_id, name, brand, description, quantity, sub_category_id, og_price,
+                                      member_price)
+            msg = f"Product {product_id} updated."
+        except RowNotFoundError as e:
+            msg = "Product ID not found."
+        except Exception as e:
+            msg = "Invalid product ID."
+
+        self.ui.display_result_msg(msg)
 
     def add_product(self):
         name = input(

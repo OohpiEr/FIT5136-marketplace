@@ -2,9 +2,12 @@ class UserInterface():
     TAB = "     "
     OPTION_PROMPT = "PLEASE SELECT AN OPTION"
     INPUT_PROMPT = "INPUT:"
+    NEWLINE = "\n"
 
-    def display(self):
-        ...
+    def display_result_msg(self, msg):
+        print(self.NEWLINE, self.NEWLINE, msg, self.NEWLINE,
+              self.NEWLINE)
+        input("Enter to continue...")
 
     def display_customer_menu(self):
         print("  _||____________________________________________||_")
@@ -61,5 +64,3 @@ class UserInterface():
         print("")
         print("")
         print("    PLEASE LOGIN WITH YOUR USERNAME AND PASSWORD: ")
-
-    

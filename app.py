@@ -1,5 +1,5 @@
 from Login import Login
-from DbHelper import DbHelper
+# from DbHelper import DbHelper
 # from domain import Admin
 # from domain import Customer
 # from UserInterface import UserInterface
@@ -9,7 +9,7 @@ from DbHelper import DbHelper
 
 
 class App:
-    db = DbHelper()
+    # db = DbHelper()
     # ui = UserInterface()
     # controller = Controller.Controller()
     EXIT_CODE = -1

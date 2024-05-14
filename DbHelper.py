@@ -1,36 +1,42 @@
 import csv
 from domain import Product
+from RowNotFoundError import RowNotFoundError
 
 
 class DbHelper:
     db_path = "db"
-    category_tbl_file_name = "category.txt"
-    customer_tbl_file_name = "customer.txt"
-    foodproduct_tbl_file_name = "foodproduct.txt"
-    product_tbl_file_name = "product.txt"
-    subcategory_tbl_file_name = "subcategory.txt"
-    user_tbl_file_name = "user.txt"
+    CATEGORY_TBL_FILE_NAME = "category.txt"
+    CUSTOMER_TBL_FILE_NAME = "customer.txt"
+    FOODPRODUCT_TBL_FILE_NAME = "foodproduct.txt"
+    PRODUCT_TBL_FILE_NAME = "product.txt"
+    SUBCATEGORY_TBL_FILE_NAME = "subcategory.txt"
+    USER_TBL_FILE_NAME = "user.txt"
 
-    def get_data(self, filename):
+    @classmethod
+    def __get_data(self, filename):
         with open(f"{self.db_path}/{filename}", mode="r", encoding="UTF-8") as f:
             data = list(csv.DictReader(f, delimiter=','))
             return data
 
+    @classmethod
     def get_all_products(self):
-        return self.get_data(self.product_tbl_file_name)
+        return self.__get_data(self.PRODUCT_TBL_FILE_NAME)
 
+    @classmethod
     def get_all_foodproduct(self):
-        return self.get_data(self.foodproduct_tbl_file_name)
+        return self.__get_data(self.FOODPRODUCT_TBL_FILE_NAME)
 
-    def get_new_id(self, file):
+    @classmethod
+    def __get_new_id(self, file):
         # https://stackoverflow.com/questions/2138873/cleanest-way-to-get-last-item-from-python-iterator
         *_, last_row = csv.reader(file, delimiter=',')
         new_id = int(last_row[0]) + 1
         return new_id
-
+    
+    @classmethod
     def add_product(self, name, brand, description, quantity, sub_category_id, og_price, member_price):
-        with open(f"{self.db_path}/{self.product_tbl_file_name}", 'r+', newline='') as f:
-            product_id = self.get_new_id(f)
+        with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", 'r+') as f:
+            product_id = self.__get_new_id(f)
             product = Product.Product(product_id, name, brand, description, quantity, sub_category_id, og_price, member_price)
 
             writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -38,8 +44,23 @@ class DbHelper:
 
             return product
     
-    # def delete_product(self, product):
+    @classmethod
+    def delete_product(self, product_id):
+        deleted = False
+        with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", 'r+') as f:
+            lines = f.readlines()
+            f.seek(0)
+            for line in lines:
+                if line[0] != str(product_id):
+                    f.write(line)
+                else:
+                    deleted = True
+            f.truncate()
+        
+        if not deleted:
+            raise RowNotFoundError
 
+    @classmethod
     def update_product(self, product_id, name=None, brand=None, description=None, quantity=None, sub_category_id=None,
                        og_price=None, member_price=None):
         # 读取原始数据
@@ -48,7 +69,7 @@ class DbHelper:
         # 找到要更新的产品在数据中的索引
         index = None
         for i, row in enumerate(data):
-            if int(row['id']) == product_id:
+            if int(row['product_id']) == product_id:
                 index = i
                 break
 
@@ -71,7 +92,7 @@ class DbHelper:
                 data[index]['member_price'] = member_price
 
             # 写入更新后的数据到文件
-            with open(f"{self.db_path}/{self.product_tbl_file_name}", mode="w", newline='', encoding="UTF-8") as f:
+            with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", mode="w", newline='', encoding="UTF-8") as f:
                 fieldnames = data[0].keys()
                 writer = csv.DictWriter(f, fieldnames=fieldnames)
 
@@ -85,5 +106,7 @@ class DbHelper:
 
 if __name__ == "__main__":
     db = DbHelper()
-    db.add_product("Colgate Total Charcoal Deep Clean Toothpaste", "Colgate",
-                   "Colgate Total Antibacterial Fluoride toothpaste has a unique formula that keeps your whole mouth healthy by fighting bacteria on teeth, tongue, cheeks, and gums for 12 hours*. Colgate Total Charcoal Deep Clean, active cleaning formula fights plaque even between teeth and hard to reach spaces", 10, 6.9, 5, 11)
+    # p = Product.Product(7, "name", "brand", "description", 10, 6.9, 5, 11)
+    db.update_product(7)
+    # db.add_product("Colgate Total Charcoal Deep Clean Toothpaste", "Colgate",
+    #                "Colgate Total Antibacterial Fluoride toothpaste has a unique formula that keeps your whole mouth healthy by fighting bacteria on teeth, tongue, cheeks, and gums for 12 hours*. Colgate Total Charcoal Deep Clean, active cleaning formula fights plaque even between teeth and hard to reach spaces", 10, 6.9, 5, 11)
