@@ -26,7 +26,7 @@ class AdminInterface(UserInterface):
             print(f"{self.TAB}[{option[0]}] {option[1]}")
         print(f"\n\n")
  
-    def display(self):
+    def display_home(self):
         self.__display(self.ADMIN_HOME_BANNER, self.ADMIN_HOME_OPTIONS, self.OPTION_PROMPT)
         
         # print(self.admin_menu_banner,"\n\n",self.OPTION_PROMPT)
