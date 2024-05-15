@@ -78,4 +78,4 @@ class CustomerController():
                 self.ui.display_result_msg("Invalid input.")
 
     def product_detail(self, product):
-        self.ui.display_result_msg(product.name)
+        self.ui.display_product_details(product)

@@ -3,8 +3,8 @@ from DbHelper import DbHelper as db
 
 class Inventory:
     def __init__(self):
-        self.__products = db.get_all_products()
         self.__categories, self.__subcategories = db.get_all_categories()
+        self.__products = db.get_all_products(self.__subcategories)
 
     @property
     def products(self):
@@ -17,9 +17,9 @@ class Inventory:
     @property
     def subcategories(self):
         return self.__subcategories
-
+    
     def add_product(self, name, brand, description, quantity, sub_category_id, og_price, member_price):
-        product = db.add_product(name, brand, description, quantity, sub_category_id, og_price, member_price)
+        product = db.add_product(name, brand, description, quantity, sub_category_id, og_price, member_price, self.__subcategories)
         self.__products.append(product)
         return product
 

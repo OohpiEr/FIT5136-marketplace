@@ -21,25 +21,40 @@ class DbHelper:
             return data
 
     @classmethod
-    def get_all_products(self):
+    def __get_subcategory(self, subcategory_id, subcategories):
+        subcategory = None
+        for subcat in subcategories:
+            if subcategory_id == subcat.id:
+                subcategory = subcat
+
+        return subcategory
+
+    @classmethod
+    def get_all_products(self, subcategories):
         product_dict_list = self.__get_data(self.PRODUCT_TBL_FILE_NAME)
         products = []
 
         for product_dict in product_dict_list:
+            # product_id, name, brand, description, quantity, sub_category, og_price, member_price
+            subcategory = self.__get_subcategory(
+                int(product_dict['subcat_id']), subcategories)
+
+            if subcategory == None:
+                raise RowNotFoundError("Subcategory not found.")
+
             product = Product.Product(
                 product_dict['product_id'],
                 product_dict['product_name'],
                 product_dict['product_brand'],
                 product_dict['product_desc'],
                 product_dict['product_qty'],
+                subcategory,
                 product_dict['product_og_price'],
                 product_dict['product_member_price'],
-                product_dict['subcat_id']
             )
             products.append(product)
 
         return products
-
 
     @classmethod
     def get_all_categories(self):
@@ -61,15 +76,17 @@ class DbHelper:
             categories.append(category)
 
         for dict in subcat_dict_list:
+            category = categories[cat_id_index_map[int(dict['cat_id'])]]
+
             subcategory = SubCategory.SubCategory(
                 int(dict['subcat_id']),
-                dict['subcat_name']
+                dict['subcat_name'],
+                category
             )
 
-            category = categories[cat_id_index_map[int(dict['cat_id'])]] 
             category.add_subcategory(subcategory)
             subcategories.append(subcategory)
-            
+
         return (categories, subcategories)
 
     @classmethod
@@ -83,16 +100,21 @@ class DbHelper:
         return new_id
 
     @classmethod
-    def add_product(self, name, brand, description, quantity, sub_category_id, og_price, member_price):
+    def add_product(self, name, brand, description, quantity, subcategory_id, og_price, member_price, subcategories):
+        subcategory = self.__get_subcategory(subcategory_id, subcategories)
+        
+        if subcategory == None:
+            raise RowNotFoundError("Subcategory not found.")
+        
         with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", 'r+', newline="") as f:
             product_id = self.__get_new_id(f)
             product = Product.Product(
-                product_id, name, brand, description, quantity, sub_category_id, og_price, member_price)
+                product_id, name, brand, description, quantity, subcategory, og_price, member_price)
 
             writer = csv.writer(
                 f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             writer.writerow([product_id, name, product.brand, description,
-                            quantity, sub_category_id, og_price, member_price])
+                            quantity, og_price, member_price, subcategory_id])
 
             return product
 
@@ -133,8 +155,6 @@ class DbHelper:
                 index = i
                 break
 
-
-
         # if the product exists
         if index is not None:
             # update information
@@ -153,7 +173,7 @@ class DbHelper:
             if member_price != '':
                 data[index]['product_member_price'] = member_price
 
-            print("The latest information for this item is: ",data[index])
+            print("The latest information for this item is: ", data[index])
             # write in the file
             with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", mode="w", newline='', encoding="UTF-8") as f:
                 fieldnames = data[0].keys()

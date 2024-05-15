@@ -1,6 +1,6 @@
-from DbHelper import DbHelper as db
+# from DbHelper import DbHelper as db
 
-from domain.Product import Product
+# from domain.Product import Product
 import csv
 
 class Customer:
@@ -8,7 +8,7 @@ class Customer:
         self.inventory = inventory
 
     def get_all_products(self):
-        return db.get_all_products()
+        return self.inventory.products
     
     def add_product_to_cart(self):
         cart_add = input("Add to Cart (please enter the name of the product you wish to add to cart): ")
