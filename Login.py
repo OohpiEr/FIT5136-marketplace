@@ -2,6 +2,8 @@ from UserInterface import UserInterface
 from AdminController import AdminController
 from CustomerController import CustomerController
 from domain.Admin import Admin
+from domain.Customer import Customer
+import csv
 
 
 class Login:
@@ -17,43 +19,31 @@ class Login:
         
         ui_obj = UserInterface()
         ui_obj.display_landing_page()
-        
-        user_choice = input(main_choice)
-        if user_choice[0] != "1" or user_choice[0] != "Q" or user_choice[0] == "" or user_choice[0] == " ":
-            print(wrong_choice)
-            user_choice = input(main_choice)
-        if user_choice[0] == "1":
-            user_choice_email = input("      # Email: ")
-            user_choice_password = input("      # Password: ")
-            strip_username = user_choice_email.strip(" ")
-            login_attempt = self.login(strip_username, user_choice_password)
-            try:
-                all_user_data = []
-                with open("db/user.txt", "r", encoding="UTF-8") as file_2:
-                    read_all_lines = file_2.read().split("\n")
-                    for lines in read_all_lines:
-                        all_user_data.append(lines)
-                        for lines_2 in all_user_data:
-                            if login_attempt and user_choice_email == admin_email:
-                                admin_controller = AdminController()
-                                admin_controller.admin_control()
-                                self.login_control()
-                            elif not login_attempt:
-                                print(incorrect_login)
-                                self.login_control()
-                            else:
-                                if login_attempt and user_choice_email == customer_email:
-                                    cust_controller = CustomerController()
-                                    cust_controller.customer_control()
-                                    # ui_obj.display_customer_menu()
-                                    # self.customer_control()
-                                    self.login_control()
-            except FileNotFoundError:
-                print("'user.txt' does not exist in system. Please create the file")
-            except IOError:
-                print("Error opening and reading from file. Make sure it exists")
-            except EOFError:
-                print("No data found in the file. Please check contents")
+
+
+        while True:
+            user_choice = input(main_choice).strip().upper()
+            if user_choice == "1":
+                user_choice_email = input("      # Email: ").strip()
+                user_choice_password = input("      # Password: ").strip()
+                login_attempt = self.login(user_choice_email, user_choice_password)
+
+                if login_attempt:
+                    if user_choice_email == admin_email:
+                        admin_interface = AdminController()
+                        admin_interface.admin_control()
+                        #self.admin_control()
+                    elif user_choice_email == customer_email:
+                        ui_obj.display_customer_menu()
+                        self.customer_control()
+                    break  # 登录成功，退出循环
+                else:
+                    print(incorrect_login)
+            elif user_choice == "Q":
+                break  # 用户选择退出，退出循环
+            else:
+                print(wrong_choice)
+
 
 
     def login(self, username, password):
@@ -80,13 +70,58 @@ class Login:
         except EOFError:
             print("No data found in the file. Please check contents")
 
-                
 
-    # def customer_control(self):
-    #     cust_message = "Please choose a Customer action: "
-    #     cust_choice = input(cust_message)
-    #     while cust_choice[0] != "Q" or cust_choice[0] == "" or cust_choice == " ":
-    #         print("Put customer menu choices here")
-    #         cust_choice = input(cust_message)
-    #         if cust_choice[0] == "Q":
+
+    # def admin_control(self):
+    #     admin_obj = Admin()
+    #     admin_message = "Please choose an Administrator action: "
+
+    #     while True:
+    #         admin_choice = input(admin_message).strip().upper()
+    #         if admin_choice == "1":
+    #             name = input("Please enter the name of the product you wish to add: ")
+    #             brand = input("Please enter the brand of the product: ")
+    #             description = input("Please enter the product description: ")
+    #             quantity = input("Please enter the quantity of the product you wish to add: ")
+    #             sub_category_id = input("Please enter the sub-category of the item you wish to add: ")
+    #             og_price = input("Please input the full price for the product: ")
+    #             member_price = input("Please enter the membership price of the product available to members: ")
+    #             admin_obj.add_product(name, brand, description, quantity, sub_category_id, og_price, member_price)
+    #         elif admin_choice == "2":
+    #             print("need to be done")
+    #         elif admin_choice == "3":
+    #             product_id = input("Please enter the product ID you wish to update: ")
+    #             name = input("Enter new name (leave blank to keep current): ")
+    #             brand = input("Enter new brand (leave blank to keep current): ")
+    #             description = input("Enter new description (leave blank to keep current): ")
+    #             quantity = input("Enter new quantity (leave blank to keep current): ")
+    #             sub_category_id = input("Enter new sub-category ID (leave blank to keep current): ")
+    #             og_price = input("Enter new original price (leave blank to keep current): ")
+    #             member_price = input("Enter new member price (leave blank to keep current): ")
+    #             admin_obj.update_product(product_id, name, brand, description, quantity, sub_category_id, og_price,
+    #                                      member_price)
+    #         elif admin_choice == "Q":
     #             break
+    #         else:
+    #             print("Invalid input. Please enter 1, 2, 3 to perform an action or 'Q' to quit.")
+
+
+
+    def customer_control(self):
+        cust_message = "Please choose a Customer action: "
+        cust_choice = input(cust_message)
+        cust_obj = Customer()
+        while cust_choice[0] != "Q" or cust_choice[0] == "" or cust_choice == " ":
+            print("Put customer menu choices here")
+            cust_choice = input(cust_message)
+            if cust_choice[0] == "1":
+                with open('db/product.txt', 'r') as f3:
+                    reader2 = csv.reader(f3)
+                    for line in reader2:
+                        print("Browsing all products: ")
+                        print(line)
+                        add = input("You may add items to cart whilst browsing. Enter 'Add' to start adding: ")
+                        if add[0] == "Add":
+                            cust_obj.add_product_to_cart()
+            if cust_choice[0] == "Q":
+                break

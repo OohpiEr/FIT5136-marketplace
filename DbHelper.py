@@ -38,6 +38,7 @@ class DbHelper:
 
         return products
 
+
     @classmethod
     def get_all_foodproduct(self):
         return self.__get_data(self.FOODPRODUCT_TBL_FILE_NAME)
@@ -96,27 +97,30 @@ class DbHelper:
         # 找到要更新的产品在数据中的索引
         index = None
         for i, row in enumerate(data):
-            if int(row['product_id']) == product_id:
+            print("这个是：", row['product_id'])
+            if row['product_id'] == product_id:
                 index = i
                 break
+
+        print("是否成功复制",index)
 
         # 如果找到了产品
         if index is not None:
             # 更新产品信息
             if name is not None:
-                data[index]['name'] = name
+                data[index]['product_name'] = name
             if brand is not None:
-                data[index]['brand'] = brand
+                data[index]['product_brand'] = brand
             if description is not None:
-                data[index]['description'] = description
+                data[index]['product_desc'] = description
             if quantity is not None:
-                data[index]['quantity'] = quantity
+                data[index]['product_qty'] = quantity
             if sub_category_id is not None:
-                data[index]['sub_category_id'] = sub_category_id
+                data[index]['subcat_id'] = sub_category_id
             if og_price is not None:
-                data[index]['og_price'] = og_price
+                data[index]['product_og_price'] = og_price
             if member_price is not None:
-                data[index]['member_price'] = member_price
+                data[index]['product_member_price'] = member_price
 
             # 写入更新后的数据到文件
             with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", mode="w", newline='', encoding="UTF-8") as f:
