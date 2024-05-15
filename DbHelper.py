@@ -71,38 +71,38 @@ class DbHelper:
     @classmethod
     def update_product(self, product_id, name=None, brand=None, description=None, quantity=None, sub_category_id=None,
                        og_price=None, member_price=None):
-        # 读取原始数据
+        # read the origin data
         data = self.get_all_products()
 
-        # 找到要更新的产品在数据中的索引
+        # find the index
         index = None
         for i, row in enumerate(data):
-            print("这个是：", row['product_id'])
             if row['product_id'] == product_id:
                 index = i
                 break
 
-        print("是否成功复制",index)
 
-        # 如果找到了产品
+
+        # if the product exists
         if index is not None:
-            # 更新产品信息
-            if name is not None:
+            # update information
+            if name != '':
                 data[index]['product_name'] = name
-            if brand is not None:
+            if brand != '':
                 data[index]['product_brand'] = brand
-            if description is not None:
+            if description != '':
                 data[index]['product_desc'] = description
-            if quantity is not None:
+            if quantity != '':
                 data[index]['product_qty'] = quantity
-            if sub_category_id is not None:
+            if sub_category_id != '':
                 data[index]['subcat_id'] = sub_category_id
-            if og_price is not None:
+            if og_price != '':
                 data[index]['product_og_price'] = og_price
-            if member_price is not None:
+            if member_price != '':
                 data[index]['product_member_price'] = member_price
 
-            # 写入更新后的数据到文件
+            print("The latest information for this item is: ",data[index])
+            # write in the file
             with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", mode="w", newline='', encoding="UTF-8") as f:
                 fieldnames = data[0].keys()
                 writer = csv.DictWriter(f, fieldnames=fieldnames)
