@@ -40,8 +40,6 @@ class DbHelper:
 
         return products
 
-    # @classmethod
-    # def __get_all_subcategories(self, category_id_index_map):
 
     @classmethod
     def get_all_categories(self):

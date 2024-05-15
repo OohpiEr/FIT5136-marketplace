@@ -1,16 +1,16 @@
 from UserInterface import UserInterface
 from AdminController import AdminController
 from CustomerController import CustomerController
-from domain.Admin import Admin
-from domain.Customer import Customer
-import csv
+# from domain.Admin import Admin
+# from domain.Customer import Customer
+# import csv
 
 
 class Login:
     def __init__(self):
         pass
 
-    def login_control(self):
+    def login_control(self, inventory):
         admin_email = "admin@merchant.monash.edu"
         customer_email = "member@student.monash.edu"
         main_choice = "Enter your choice, or 'Q' to Quit: "
@@ -30,7 +30,7 @@ class Login:
 
                 if login_attempt:
                     if user_choice_email == admin_email:
-                        admin_controller = AdminController()
+                        admin_controller = AdminController(inventory)
                         admin_controller.admin_control()
                     elif user_choice_email == customer_email:
                         # ui_obj.display_customer_menu()
