@@ -30,12 +30,13 @@ class Login:
 
                 if login_attempt:
                     if user_choice_email == admin_email:
-                        admin_interface = AdminController()
-                        admin_interface.admin_control()
-                        #self.admin_control()
+                        admin_controller = AdminController()
+                        admin_controller.admin_control()
                     elif user_choice_email == customer_email:
-                        ui_obj.display_customer_menu()
-                        self.customer_control()
+                        # ui_obj.display_customer_menu()
+                        # self.customer_control()
+                        cust_controller = CustomerController()
+                        cust_controller.customer_control()
                     break  # 登录成功，退出循环
                 else:
                     print(incorrect_login)
@@ -107,21 +108,21 @@ class Login:
 
 
 
-    def customer_control(self):
-        cust_message = "Please choose a Customer action: "
-        cust_choice = input(cust_message)
-        cust_obj = Customer()
-        while cust_choice[0] != "Q" or cust_choice[0] == "" or cust_choice == " ":
-            print("Put customer menu choices here")
-            cust_choice = input(cust_message)
-            if cust_choice[0] == "1":
-                with open('db/product.txt', 'r') as f3:
-                    reader2 = csv.reader(f3)
-                    for line in reader2:
-                        print("Browsing all products: ")
-                        print(line)
-                        add = input("You may add items to cart whilst browsing. Enter 'Add' to start adding: ")
-                        if add[0] == "Add":
-                            cust_obj.add_product_to_cart()
-            if cust_choice[0] == "Q":
-                break
+    # def customer_control(self):
+    #     cust_message = "Please choose a Customer action: "
+    #     cust_choice = input(cust_message)
+    #     cust_obj = Customer()
+    #     while cust_choice[0] != "Q" or cust_choice[0] == "" or cust_choice == " ":
+    #         print("Put customer menu choices here")
+    #         cust_choice = input(cust_message)
+    #         if cust_choice[0] == "1":
+    #             with open('db/product.txt', 'r') as f3:
+    #                 reader2 = csv.reader(f3)
+    #                 for line in reader2:
+    #                     print("Browsing all products: ")
+    #                     print(line)
+    #                     add = input("You may add items to cart whilst browsing. Enter 'Add' to start adding: ")
+    #                     if add[0] == "Add":
+    #                         cust_obj.add_product_to_cart()
+    #         if cust_choice[0] == "Q":
+    #             break

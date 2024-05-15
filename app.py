@@ -20,22 +20,6 @@ class App:
 
     def start(self):
         self.login.login_control()
-        # curr_input = None
-        # while curr_input is not self.EXIT_CODE:
-        #     # self.ui = AdminInterface()
-        #     self.controller = AdminController()
-        #     # self.controller.handle_input(inp)
-        #     self.controller.home_page()
-
-        #     # self.ui.display()
-        #     # inp = input("Input: ")
-        #     # print(inp)
-
-        # exit()
-        ############## add back into function call #############self.login.login_control()
-        # self.ui.display_admin_menu()
-        # customer_obj = Customer()
-        # customer_obj.add_product_to_cart()
 
 
 if __name__ == "__main__":
