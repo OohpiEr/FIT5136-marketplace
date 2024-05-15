@@ -20,7 +20,23 @@ class DbHelper:
 
     @classmethod
     def get_all_products(self):
-        return self.__get_data(self.PRODUCT_TBL_FILE_NAME)
+        product_dict_list = self.__get_data(self.PRODUCT_TBL_FILE_NAME)
+        products = []
+        
+        for product_dict in product_dict_list:
+            product = Product.Product(
+                product_dict['product_id'],
+                product_dict['product_name'],
+                product_dict['product_brand'],
+                product_dict['product_desc'],
+                product_dict['product_qty'],
+                product_dict['product_og_price'],
+                product_dict['product_member_price'],
+                product_dict['subcat_id']
+            )
+            products.append(product)
+
+        return products
 
     @classmethod
     def get_all_foodproduct(self):
@@ -32,18 +48,21 @@ class DbHelper:
         *_, last_row = csv.reader(file, delimiter=',')
         new_id = int(last_row[0]) + 1
         return new_id
-    
+
     @classmethod
     def add_product(self, name, brand, description, quantity, sub_category_id, og_price, member_price):
-        with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", 'r+',newline="") as f:
+        with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", 'r+', newline="") as f:
             product_id = self.__get_new_id(f)
-            product = Product.Product(product_id, name, brand, description, quantity, sub_category_id, og_price, member_price)
+            product = Product.Product(
+                product_id, name, brand, description, quantity, sub_category_id, og_price, member_price)
 
-            writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow([product_id, name, product.brand, description, quantity, sub_category_id, og_price, member_price])
+            writer = csv.writer(
+                f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer.writerow([product_id, name, product.brand, description,
+                            quantity, sub_category_id, og_price, member_price])
 
             return product
-    
+
     @classmethod
     def delete_product(self, product_id):
         deleted = False
@@ -57,13 +76,14 @@ class DbHelper:
                     # f.write(line)
                 else:
                     deleted = True
-            
+
             f.seek(0)
-            writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer = csv.writer(
+                f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             writer.writerows(prod_list)
-            
+
             f.truncate()
-        
+
         if not deleted:
             raise RowNotFoundError
 
@@ -71,7 +91,7 @@ class DbHelper:
     def update_product(self, product_id, name=None, brand=None, description=None, quantity=None, sub_category_id=None,
                        og_price=None, member_price=None):
         # 读取原始数据
-        data = self.get_all_products()
+        data = self.__get_data(self.PRODUCT_TBL_FILE_NAME)
 
         # 找到要更新的产品在数据中的索引
         index = None
@@ -116,4 +136,4 @@ if __name__ == "__main__":
     # p = Product.Product(7, "name", "brand", "description", 10, 6.9, 5, 11)
     db.delete_product(5)
     # db.add_product("Colgate Total Charcoal Deep Clean Toothpaste", "Colgate",
-                #    "Colgate Total Antibacterial Fluoride toothpaste has a unique formula that keeps your whole mouth healthy by fighting bacteria on teeth, tongue, cheeks, and gums for 12 hours*. Colgate Total Charcoal Deep Clean, active cleaning formula fights plaque even between teeth and hard to reach spaces", 10, 6.9, 5, 11)
+    #    "Colgate Total Antibacterial Fluoride toothpaste has a unique formula that keeps your whole mouth healthy by fighting bacteria on teeth, tongue, cheeks, and gums for 12 hours*. Colgate Total Charcoal Deep Clean, active cleaning formula fights plaque even between teeth and hard to reach spaces", 10, 6.9, 5, 11)

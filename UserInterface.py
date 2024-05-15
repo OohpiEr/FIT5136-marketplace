@@ -9,26 +9,6 @@ class UserInterface():
               self.NEWLINE)
         input("Enter to continue...")
 
-    def display_customer_menu(self):
-        print("  _||____________________________________________||_")
-        print("(__  ____________________________________________  __)")
-        print("   ||                                            ||")
-        print("   ||              -- MONASH SHOP --             ||")
-        print("   ||                                            ||")
-        print("   ||                 [CUSTOMER]                 ||")
-        print("   ||                                            ||")
-        print("   ||                                            ||")
-        print("   ||                                            ||")
-        print("  _||____________________________________________||_")
-        print("(__  ____________________________________________  __)")
-        print("   ||                                            ||")
-        print("")
-        print("")
-        print("     PLEASE SELECT AN OPTION")
-        print("       [1] Browse All Items")
-        print("       [2] View Shopping Cart")
-        print("       [Q] Back")
-        print("")
 
     def display_landing_page(self):
         print("  _||____________________________________________||_")
