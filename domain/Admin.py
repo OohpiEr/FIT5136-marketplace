@@ -12,6 +12,12 @@ class Admin:
     def delete_product(self, product_id):
         self.inventory.delete_product(product_id)
 
+    def show_product(self):
+        print("Available product information is listed below:")
+        data = db.get_all_products()
+        for info in data:
+            print(info)
+
     def update_product(self, product_id, name=None, brand=None, description=None, quantity=None, sub_category_id=None, og_price=None, member_price=None):
         self.inventory.update_product(
             product_id, name, brand, description, quantity, sub_category_id, og_price, member_price)
