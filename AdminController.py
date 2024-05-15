@@ -10,11 +10,6 @@ class AdminController():
         self.ui = AdminInterface()
         self.admin = Admin(inventory)
 
-    def home_page(self):
-        self.ui.display_home()
-        inp = input("Input: ")
-        print(inp)
-
     def admin_control(self):
         # [("1","Add Item"), ("2", "Delete Item"), ("3", "Edit Item"), ("q", "Quit")]
         quit_flag = False
@@ -100,5 +95,4 @@ class AdminController():
         except ValueError as e:
             raise UserInputError
             
-
         self.ui.display_result_msg(f"Product added:\n" + str(product))

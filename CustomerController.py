@@ -1,6 +1,6 @@
 from UserInputError import UserInputError
 from CustomerInterface import CustomerInterface
-from RowNotFoundError import RowNotFoundError
+# from RowNotFoundError import RowNotFoundError
 from domain.Customer import Customer
 
 
@@ -9,11 +9,18 @@ class CustomerController():
         # super().__init__()
         self.ui = CustomerInterface()
         self.customer = Customer(inventory)
-
-    def home_page(self):
-        self.ui.display_home()
-        inp = input("Input: ")
-        print(inp)
+        
+    def __check_input(self, input):
+        if len(input) == 0:
+            raise UserInputError
+        
+    def view_shopping_cart(self):
+        # TODO: implement shopping cart
+        pass
+    
+    def add_to_cart(self):
+        # TODO: implement add_to_cart
+        pass
 
     def customer_control(self):
         quit_flag = False
@@ -25,8 +32,8 @@ class CustomerController():
             inp = input().strip().lower()
 
             try:
-                if len(inp) == 0:
-                    raise UserInputError
+                self.__check_input(inp)
+
 
                 match inp:
                     case "1":
@@ -44,10 +51,6 @@ class CustomerController():
                 print(
                     "Invalid input. Please enter 1, 2 to perform an action or 'q' to quit.")
 
-    def view_shopping_cart(self):
-        # TODO: implement shopping cart
-        pass
-
     def browse_all_products(self):
         quit_flag = False
 
@@ -59,8 +62,7 @@ class CustomerController():
             inp = input().strip().lower()
 
             try:
-                if len(inp) == 0:
-                    raise UserInputError
+                self.__check_input(inp)
                 if inp == "q":
                     return
 
@@ -78,4 +80,23 @@ class CustomerController():
                 self.ui.display_result_msg("Invalid input.")
 
     def product_detail(self, product):
-        self.ui.display_product_details(product)
+        quit_flag = False
+
+        while not quit_flag:
+            self.ui.display_product_details(product)
+            
+            inp = input().strip().lower()
+
+            try:
+                self.__check_input(inp)
+                match inp:
+                    case "1":
+                        self.add_to_cart()
+                    case "2":
+                        self.view_shopping_cart()
+                    case "q":
+                        return
+                    case _:
+                        raise UserInputError
+            except UserInputError as e:
+                print("Invalid input.")
