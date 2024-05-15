@@ -1,5 +1,7 @@
 import csv
 from domain import Product
+from domain import Category
+from domain import SubCategory
 from RowNotFoundError import RowNotFoundError
 
 
@@ -22,7 +24,7 @@ class DbHelper:
     def get_all_products(self):
         product_dict_list = self.__get_data(self.PRODUCT_TBL_FILE_NAME)
         products = []
-        
+
         for product_dict in product_dict_list:
             product = Product.Product(
                 product_dict['product_id'],
@@ -38,6 +40,39 @@ class DbHelper:
 
         return products
 
+    # @classmethod
+    # def __get_all_subcategories(self, category_id_index_map):
+
+    @classmethod
+    def get_all_categories(self):
+        cat_dict_list = self.__get_data(self.CATEGORY_TBL_FILE_NAME)
+        subcat_dict_list = self.__get_data(self.SUBCATEGORY_TBL_FILE_NAME)
+        subcategories = []
+        categories = []
+        cat_id_index_map = [None] * (int(cat_dict_list[-1]['cat_id']) + 1)
+
+        for i, dict in enumerate(cat_dict_list):
+            cat_id = int(dict['cat_id'])
+
+            category = Category.Category(
+                cat_id,
+                dict['cat_name']
+            )
+            # id, name
+            cat_id_index_map[cat_id] = i
+            categories.append(category)
+
+        for dict in subcat_dict_list:
+            subcategory = SubCategory.SubCategory(
+                int(dict['subcat_id']),
+                dict['subcat_name']
+            )
+
+            category = categories[cat_id_index_map[int(dict['cat_id'])]] 
+            category.add_subcategory(subcategory)
+            subcategories.append(subcategory)
+            
+        return (categories, subcategories)
 
     @classmethod
     def get_all_foodproduct(self):
@@ -45,7 +80,6 @@ class DbHelper:
 
     @classmethod
     def __get_new_id(self, file):
-        # https://stackoverflow.com/questions/2138873/cleanest-way-to-get-last-item-from-python-iterator
         *_, last_row = csv.reader(file, delimiter=',')
         new_id = int(last_row[0]) + 1
         return new_id
@@ -102,7 +136,7 @@ class DbHelper:
                 index = i
                 break
 
-        print("是否成功复制",index)
+        print("是否成功复制", index)
 
         # 如果找到了产品
         if index is not None:
@@ -138,6 +172,6 @@ class DbHelper:
 if __name__ == "__main__":
     db = DbHelper()
     # p = Product.Product(7, "name", "brand", "description", 10, 6.9, 5, 11)
-    db.delete_product(5)
+    db.get_all_categories()
     # db.add_product("Colgate Total Charcoal Deep Clean Toothpaste", "Colgate",
     #    "Colgate Total Antibacterial Fluoride toothpaste has a unique formula that keeps your whole mouth healthy by fighting bacteria on teeth, tongue, cheeks, and gums for 12 hours*. Colgate Total Charcoal Deep Clean, active cleaning formula fights plaque even between teeth and hard to reach spaces", 10, 6.9, 5, 11)
