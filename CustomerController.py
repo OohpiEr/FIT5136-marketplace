@@ -52,7 +52,34 @@ class CustomerController():
         
 
     def browse_all_products(self):
-        products = self.customer.get_all_products()
-        self.ui.display_product_list(products)
-        
+        quit_flag = False
+        display_menu = True
+
+        while not quit_flag:
+            if display_menu:
+                products = self.customer.get_all_products()
+                self.ui.display_product_list(products)
+
+            inp = input().strip().lower()
+
+            # TODO: implement
+            # try:
+            #     if len(inp) == 0:
+            #         raise UserInputError
+
+            #     match inp:
+            #         case "1":
+            #             self.browse_all_products()
+            #             display_menu = True
+            #         case "2":
+            #             self.view_shopping_cart()
+            #             display_menu = True
+            #         case "q":
+            #             return
+            #         case _:
+            #             display_menu = False
+            #             raise UserInputError
+            # except UserInputError as e:
+            #     print(
+            #         "Invalid input. Please enter 1, 2 to perform an action or 'q' to quit.")
         

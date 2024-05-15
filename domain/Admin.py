@@ -14,7 +14,7 @@ class Admin:
 
     def show_product(self):
         print("Available product information is listed below:")
-        data = db.get_all_products()
+        data = self.inventory.products
         for info in data:
             print(info)
 
