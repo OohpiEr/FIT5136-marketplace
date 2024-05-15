@@ -1,0 +1,2 @@
+
+open('user.txt')
