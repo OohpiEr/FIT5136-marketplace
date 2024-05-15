@@ -3,6 +3,7 @@ class UserInterface():
     OPTION_PROMPT = "PLEASE SELECT AN OPTION"
     INPUT_PROMPT = "INPUT:"
     NEWLINE = "\n"
+    QUIT_OPTION = ("q", "Quit")
 
     def display_result_msg(self, msg):
         print(self.NEWLINE, self.NEWLINE, msg, self.NEWLINE, self.NEWLINE)

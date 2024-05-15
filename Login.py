@@ -35,7 +35,7 @@ class Login:
                     elif user_choice_email == customer_email:
                         # ui_obj.display_customer_menu()
                         # self.customer_control()
-                        cust_controller = CustomerController()
+                        cust_controller = CustomerController(inventory)
                         cust_controller.customer_control()
                     break  # 登录成功，退出循环
                 else:

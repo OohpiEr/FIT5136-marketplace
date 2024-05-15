@@ -4,8 +4,8 @@ from domain.Product import Product
 import csv
 
 class Customer:
-    def __init__(self):
-        return
+    def __init__(self,inventory):
+        self.inventory = inventory
 
     def get_all_products(self):
         return db.get_all_products()

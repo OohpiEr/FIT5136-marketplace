@@ -46,7 +46,7 @@ class AdminController():
                         display_menu = False
                         raise UserInputError
             except UserInputError as e:
-                print("Invalid input. Please enter 1, 2, 3 to perform an action or 'q' to quit.")
+                self.ui.display_result_msg("Invalid input. Please enter 1, 2, 3 to perform an action or 'q' to quit.")
 
     def delete_product(self):
         product_id = input("Please enter the product ID you wish to delete: ").strip()

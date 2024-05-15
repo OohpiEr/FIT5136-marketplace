@@ -51,12 +51,22 @@ class CustomerInterface(UserInterface):
         return self.CUST_HOME_OPTIONS
 
     def display_product_list(self, product_list):
+        display_options = []
         options = []
+        
         for i, product in enumerate(product_list):
-            options.append((i+1, f"{product.name} | ${product.og_price}"))
+            display_options.append((i+1, f"{product.name} | ${product.og_price}"))
+            options.append((i,product))
+        
+        display_options.append(self.QUIT_OPTION)
+        options.append(self.QUIT_OPTION)
+        
         self.__display(self.CUST_PRODUCT_LIST_BANNER,
-                       options, self.OPTION_PROMPT)
-
+                       display_options, self.OPTION_PROMPT)
+        
+        return options
+        
+        
     def display_product_details(self, product):
         print(f"NAME: {product.name}")
         print(f"BRAND: {product.brand}")
