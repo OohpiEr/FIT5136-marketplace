@@ -1,2 +1,2 @@
 id,name,brand,og_price,quantity,delivery
-5,New,brand,66,2,pick
+5,New,brand,66,5,pickup

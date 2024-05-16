@@ -15,7 +15,7 @@ class AdminInterface(UserInterface):
 (__  ____________________________________________  __)
    ||                                            ||"""
 
-    ADMIN_HOME_OPTIONS = [("1","Add Item"), ("2", "Delete Item"), ("3", "Edit Item"), ("q", "Quit")]
+    ADMIN_HOME_OPTIONS = [("1","Add Item"), ("2", "Delete Item"), ("3", "Edit Item"),("4", "Browse Item"), ("q", "Quit")]
     
     def __init__(self) -> None:
         super().__init__()
