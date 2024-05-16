@@ -62,6 +62,19 @@ class AdminController():
         self.ui.display_result_msg(msg)
 
     def update_product(self):
+        """
+        Update a product in the inventory.
+
+        Parameters:
+        - product_id (str): The ID of the product to be updated.
+        - name (str): The new name of the product. Leave blank to keep the current name.
+        - brand (str): The new brand of the product. Leave blank to keep the current brand.
+        - description (str): The new description of the product. Leave blank to keep the current description.
+        - quantity (str): The new quantity of the product. Leave blank to keep the current quantity.
+        - sub_category_id (str): The new sub-category ID of the product. Leave blank to keep the current sub-category ID.
+        - og_price (str): The new original price of the product. Leave blank to keep the current original price.
+        - member_price (str): The new member price of the product. Leave blank to keep the current member price.
+        """
         self.admin.show_product()
         product_id = input("Please enter the product ID you wish to update: ").strip()
         name = input("Enter new name (leave blank to keep current): ").strip()

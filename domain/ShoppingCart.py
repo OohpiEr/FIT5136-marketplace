@@ -11,6 +11,16 @@ class ShoppingCart:
         self.total_price = 0
 
     def add_to_cart(self, product):
+        """
+        Add a specified quantity of a product to the shopping cart.
+
+        Parameters:
+        - product (Product): The product to add to the shopping cart.
+
+        Returns:
+        None
+
+        """
         try:
             num_add = int(input(f"How many '{product.name}' do you want to add to the shopping cart? "))
         except ValueError:
@@ -34,6 +44,15 @@ class ShoppingCart:
         print(f"{num_add} '{product.name}' added to the shopping cart.")
 
     def view_cart(self):
+        """
+        View the contents of the shopping cart.
+
+        Prints the products added to the shopping cart along with their quantities and prices.
+
+        Returns:
+        None
+
+        """
         if not self.items:
             print("Your shopping cart is empty.")
         else:
