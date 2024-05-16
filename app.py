@@ -1,6 +1,5 @@
 from Login import Login
 from domain.Inventory import Inventory
-from Controller import Controller
 
 
 class App:
@@ -9,7 +8,6 @@ class App:
 
     def __init__(self):
         self.login = Login()
-        # self.user = None
 
     def start(self):
         self.login.login_control(self.inventory)

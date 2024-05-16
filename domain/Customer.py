@@ -19,5 +19,3 @@ class Customer:
 
     def checkout(self):
         pass
-
-
