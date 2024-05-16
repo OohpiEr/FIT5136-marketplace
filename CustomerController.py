@@ -22,7 +22,29 @@ class CustomerController():
 
     def view_shopping_cart(self):
         self.customer.view_shopping_cart()
+        self.cart_operation_displat()
+        select = input("Please input your option:\n")
+        if select=='1':
+            order_list = []
+            product_name = input("Please input the product name:\n")
+            delivery_way = input("Please input the delivery way(eg:delivery or pickup):\n")
+            for index,item in enumerate(self.customer.shopping_cart.items):
+                if item['product'].name==product_name:
+                    self.customer.shopping_cart.items.pop(index)
+                    order_list.append([item["product"].id,item["product"].name,item["product"].brand,item["product"].og_price,item["quantity"],delivery_way])
+            if len(order_list)>0:
+                with open('db/order.txt','w+') as f:
+                    f.write("id,name,brand,og_price,quantity,delivery\n")
+                    for item in order_list:
+                        f.write(",".join([str(value) for value in item])+"\n")
+                print("Pay finish!")
+            else:
+                print("There is no product")
+        else:
+            pass
 
+    def cart_operation_displat(self):
+        print("PLEASE SELECT AN OPTION\n[1] Pay for a product\n [2]Quiz")
 
 
 
@@ -46,6 +68,9 @@ class CustomerController():
                     case "2":
                         self.view_shopping_cart()
                         display_menu = True
+                    # case "3":
+                    #     self.view_shopping_cart()
+                    #     display_menu = True
                     case "q":
                         return
                     case _:
@@ -72,7 +97,7 @@ class CustomerController():
 
                 inp_found = False
                 for op in options:
-                    if inp == str(op[0]):
+                    if inp == str(op[0] + 1):
                         self.product_detail(op[1])
                         inp_found = True
                         break
@@ -104,3 +129,6 @@ class CustomerController():
                         raise UserInputError
             except UserInputError as e:
                 print("Invalid input.")
+
+    def pay_product(self,):
+        pass
