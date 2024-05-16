@@ -2,6 +2,7 @@ from UserInputError import UserInputError
 from CustomerInterface import CustomerInterface
 # from RowNotFoundError import RowNotFoundError
 from domain.Customer import Customer
+from domain.ShoppingCart import ShoppingCart
 import csv
 
 
@@ -10,27 +11,20 @@ class CustomerController():
         # super().__init__()
         self.ui = CustomerInterface()
         self.customer = Customer(inventory)
+
         
     def __check_input(self, input):
         if len(input) == 0:
             raise UserInputError
-        
+
+    def add_to_cart(self, product):
+        self.customer.add_to_cart(product)
+
     def view_shopping_cart(self):
-        # TODO: implement shopping cart
-        pass
-    
-    def add_to_cart(self):
-        cart_add = input("Add to Cart (please enter the product ID number of the product you wish to add to cart): ")
-        with open('db/product.txt', 'r+', newline='') as f2:
-            with open('db/cart.txt', 'a', newline='') as w2:
-                reader = csv.reader(f2, delimiter=',')
-                for row in reader:
-                    if row and row[0] == cart_add:  # Code inspired from Author: wwii, Link: https://stackoverflow.com/questions/39336449/python-check-if-value-in-csv-file
-                        w2.write(str(row))
-                        w2.write('\n')
-                        print("You have successfully added ", row)
-                    else:
-                        print("That item is not in stock or is not selling")
+        self.customer.view_shopping_cart()
+
+
+
 
     def customer_control(self):
         quit_flag = False
@@ -101,7 +95,7 @@ class CustomerController():
                 self.__check_input(inp)
                 match inp:
                     case "1":
-                        self.add_to_cart()
+                        self.add_to_cart(product)
                     case "2":
                         self.view_shopping_cart()
                     case "q":

@@ -6,3 +6,12 @@ Colgate Total Charcoal Deep Clean Toothpaste
 Colgate Total Charcoal Deep Clean Toothpaste
 Colgate Total Charcoal Deep Clean Toothpaste
 Colgate Total Charcoal Deep Clean Toothpaste
+
+
+
+
+
+
+['1', 'Colgate Total Advanced Clean Toothpaste', 'Colgate', 'Colgate Total Antibacterial Fluoride toothpaste has a unique formula that keeps your whole mouth healthy by fighting bacteria on teeth, tongue, cheeks, and gums for 12 hours*. Colgate Total Advanced Clean is formulated with micro cleaning particles similar to what dentists use. Smooths and polishes teeth and provides a superior clean', '10', '6.9', '5', '11']
+5,New,brand,rrr,66,12
+5,New,brand,rrr,66,12
