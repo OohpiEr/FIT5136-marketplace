@@ -54,6 +54,7 @@ class Inventory:
                 product.og_price = og_price
             if member_price != '':
                 product.member_price = member_price
+            print("The latest information for this item is\n",product)
         else:
             print(f"Failed to update product with ID {product_id}.")
     
