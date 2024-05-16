@@ -1,3 +1,25 @@
+"""
+Group Number: 4
+Group Members: Margaret Tai, Tian Er Ru, Mingzhu Qian, Jialin Zhong
+
+This class's functionality is to provide the Monash Merchant Online Shopping Website with the ability
+to login as a Customer or Administrator, to perform certain tasks such as browse items, manage inventory,
+and manage purchases through an online shopping portal for students and staff. The login control function
+acts as the access control for logging into the website to access accounts and manage such inventory
+or purchases to fulfil the purpose of the Monash Merchant Marketplace. The login takes two inputs:
+email and password, and verifies whether the account user/holder exists in the database, to be able to login
+safely and securely to the owner's account. The only users are an administrator and customer, from which
+will use credentials from the provided information.
+
+Administrator email: admin@merchant.monash.edu
+Administrator password: 12345678
+
+Customer email: member@student.monash.edu
+Customer password: Monash1234
+
+"""
+
+
 from UserInterface import UserInterface
 from AdminController import AdminController
 from CustomerController import CustomerController
