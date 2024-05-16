@@ -60,18 +60,18 @@ class AdminController():
 
     def update_product(self):
         self.admin.show_product()
-        product_id = input("Please enter the product ID you wish to update: ")
-        name = input("Enter new name (leave blank to keep current): ")
-        brand = input("Enter new brand (leave blank to keep current): ")
+        product_id = input("Please enter the product ID you wish to update: ").strip()
+        name = input("Enter new name (leave blank to keep current): ").strip()
+        brand = input("Enter new brand (leave blank to keep current): ").strip()
         description = input(
-            "Enter new description (leave blank to keep current): ")
-        quantity = input("Enter new quantity (leave blank to keep current): ")
+            "Enter new description (leave blank to keep current): ").strip()
+        quantity = input("Enter new quantity (leave blank to keep current): ").strip()
         sub_category_id = input(
-            "Enter new sub-category ID (leave blank to keep current): ")
+            "Enter new sub-category ID (leave blank to keep current): ").strip()
         og_price = input(
-            "Enter new original price (leave blank to keep current): ")
+            "Enter new original price (leave blank to keep current): ").strip()
         member_price = input(
-            "Enter new member price (leave blank to keep current): ")
+            "Enter new member price (leave blank to keep current): ").strip()
         self.admin.update_product(product_id, name, brand, description, quantity, sub_category_id, og_price,
                                   member_price)
 

@@ -34,22 +34,26 @@ class Inventory:
                 return i, product
 
     def update_product(self, product_id, name=None, brand=None, description=None, quantity=None, sub_category_id=None, og_price=None, member_price=None):
-        db.update_product(product_id, name, brand, description,
+        updated_product = db.update_product(product_id, name, brand, description,
                           quantity, sub_category_id, og_price, member_price)
-        i, product = self.__get_product(product_id)
 
-        if name != '':
-            product.name = name
-        if brand != '':
-            product.brand = brand
-        if description != '':
-            product.description = description
-        if quantity != '':
-            product.quantity = quantity
-        if sub_category_id != '':
-            product.sub_category_id = sub_category_id
-        if og_price != '':
-            product.og_price = og_price
-        if member_price != '':
-            product.member_price = member_price
+        if updated_product:
+            print("Product updated successfully.")
+            i, product = self.__get_product(product_id)
+            if name != '':
+                product.name = name
+            if brand != '':
+                product.brand = brand
+            if description != '':
+                product.description = description
+            if quantity != '':
+                product.quantity = quantity
+            if sub_category_id != '':
+                product.sub_category_id = sub_category_id
+            if og_price != '':
+                product.og_price = og_price
+            if member_price != '':
+                product.member_price = member_price
+        else:
+            print(f"Failed to update product with ID {product_id}.")
     

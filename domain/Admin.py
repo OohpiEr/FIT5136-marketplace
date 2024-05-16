@@ -14,10 +14,12 @@ class Admin:
 
     def show_product(self):
         print("Available product information is listed below:")
-        data = self.inventory.products
-        for info in data:
-            print(info)
+        for product in self.inventory.products:
+            print(product)
+            print("========================")
 
     def update_product(self, product_id, name=None, brand=None, description=None, quantity=None, sub_category_id=None, og_price=None, member_price=None):
-        self.inventory.update_product(
-            product_id, name, brand, description, quantity, sub_category_id, og_price, member_price)
+        self.inventory.update_product(product_id, name, brand, description, quantity, sub_category_id, og_price,
+                                             member_price)
+
+

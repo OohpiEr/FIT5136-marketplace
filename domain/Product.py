@@ -79,7 +79,8 @@ class Product:
         self.__member_price = value
 
     def __str__(self):
-        return "    name = {}\n    brand = {}\n    description = {}\n    quantity = {}\n    category = {}\n    og_price = {}\n    member_price = {}".format(
+        return "    id = {}\n    name = {}\n    brand = {}\n    description = {}\n    quantity = {}\n    category = {}\n    og_price = {}\n    member_price = {}".format(
+            self.__id,
             self.__name,
             self.__brand,
             self.__description,

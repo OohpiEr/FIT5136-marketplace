@@ -143,10 +143,10 @@ class DbHelper:
             raise RowNotFoundError
 
     @classmethod
-    def update_product(self, product_id, name=None, brand=None, description=None, quantity=None, sub_category_id=None,
+    def update_product(cls, product_id, name=None, brand=None, description=None, quantity=None, sub_category_id=None,
                        og_price=None, member_price=None):
         # read the origin data
-        data = self.get_all_products()
+        data = cls.__get_data(cls.PRODUCT_TBL_FILE_NAME)
 
         # find the index
         index = None
@@ -173,18 +173,18 @@ class DbHelper:
             if member_price != '':
                 data[index]['product_member_price'] = member_price
 
-            print("The latest information for this item is: ", data[index])
+            print("The latest information for this item is: \n", data[index])
             # write in the file
-            with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", mode="w", newline='', encoding="UTF-8") as f:
+            with open(f"{cls.db_path}/{cls.PRODUCT_TBL_FILE_NAME}", mode="w", newline='', encoding="UTF-8") as f:
                 fieldnames = data[0].keys()
                 writer = csv.DictWriter(f, fieldnames=fieldnames)
 
                 writer.writeheader()
                 writer.writerows(data)
 
-            print("Product updated successfully.")
-        else:
-            print(f"Product with ID {product_id} not found.")
+            return True
+        return False
+
 
 
 if __name__ == "__main__":
