@@ -9,7 +9,6 @@ class DbHelper:
     db_path = "db"
     CATEGORY_TBL_FILE_NAME = "category.txt"
     CUSTOMER_TBL_FILE_NAME = "customer.txt"
-    FOODPRODUCT_TBL_FILE_NAME = "foodproduct.txt"
     PRODUCT_TBL_FILE_NAME = "product.txt"
     SUBCATEGORY_TBL_FILE_NAME = "subcategory.txt"
     USER_TBL_FILE_NAME = "user.txt"
@@ -88,10 +87,6 @@ class DbHelper:
             subcategories.append(subcategory)
 
         return (categories, subcategories)
-
-    @classmethod
-    def get_all_foodproduct(self):
-        return self.__get_data(self.FOODPRODUCT_TBL_FILE_NAME)
 
     @classmethod
     def __get_new_id(self, file):
