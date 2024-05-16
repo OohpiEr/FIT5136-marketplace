@@ -168,7 +168,6 @@ class DbHelper:
             if member_price != '':
                 data[index]['product_member_price'] = member_price
 
-            print("The latest information for this item is: \n", data[index])
             # write in the file
             with open(f"{cls.db_path}/{cls.PRODUCT_TBL_FILE_NAME}", mode="w", newline='', encoding="UTF-8") as f:
                 fieldnames = data[0].keys()

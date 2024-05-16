@@ -1,4 +1,9 @@
+"""
+The Shopping Cart class manages the actions and functions which add to the shopping cart of the user's present
+session. This includes being able to add items or products to their shopping cart, and viewing their shopping
+cart so as to be able to have an overview of their current group of potential purchases.
 
+"""
 
 class ShoppingCart:
     def __init__(self):
