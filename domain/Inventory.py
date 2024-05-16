@@ -34,6 +34,20 @@ class Inventory:
                 return i, product
 
     def update_product(self, product_id, name=None, brand=None, description=None, quantity=None, sub_category_id=None, og_price=None, member_price=None):
+        """
+        Update a product in the inventory.
+
+        Parameters:
+        - product_id (str): The ID of the product to be updated.
+        - name (str): The new name of the product. Leave blank to keep the current name.
+        - brand (str): The new brand of the product. Leave blank to keep the current brand.
+        - description (str): The new description of the product. Leave blank to keep the current description.
+        - quantity (str): The new quantity of the product. Leave blank to keep the current quantity.
+        - sub_category_id (str): The new sub-category ID of the product. Leave blank to keep the current sub-category ID.
+        - og_price (str): The new original price of the product. Leave blank to keep the current original price.
+        - member_price (str): The new member price of the product. Leave blank to keep the current member price.
+
+        """
         updated_product = db.update_product(product_id, name, brand, description,
                           quantity, sub_category_id, og_price, member_price)
 
