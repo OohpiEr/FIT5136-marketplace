@@ -97,7 +97,7 @@ class CustomerController():
 
                 inp_found = False
                 for op in options:
-                    if inp == str(op[0]):
+                    if inp == str(op[0] + 1):
                         self.product_detail(op[1])
                         inp_found = True
                         break

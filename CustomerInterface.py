@@ -74,7 +74,6 @@ class CustomerInterface(UserInterface):
             options.append((i, product))
 
         display_options.append(self.QUIT_OPTION)
-        options.append(self.QUIT_OPTION)
 
         self.__display(self.CUST_PRODUCT_LIST_BANNER,
                        display_options, self.OPTION_PROMPT)
