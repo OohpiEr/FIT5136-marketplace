@@ -46,13 +46,14 @@ class LoginController:
                     if user_choice_email == cur_user.email and user_choice_password == cur_user.password:
                         user = cur_user
                         break
+                    
                 if user is not None:
                     match user.id:
                         case 1:
-                            admin_controller = AdminController(cur_user)
+                            admin_controller = AdminController(user)
                             admin_controller.admin_control()
                         case 2:
-                            cust_controller = CustomerController(cur_user)
+                            cust_controller = CustomerController(user)
                             cust_controller.customer_control()
                         case _:
                             print(incorrect_login)

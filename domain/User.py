@@ -2,6 +2,13 @@ class User:
     """User class"""
 
     def __init__(self, id, email, password, inventory):
+        """Constructor
+
+        :param id: user id, primary key
+        :param email: user email
+        :param password: user password
+        :param inventory: inventory of the application
+        """
         self.__id = id
         self.__password = password
         self.__email = email

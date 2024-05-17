@@ -47,6 +47,11 @@ class DbHelper:
 
     @classmethod
     def get_all_users(self, inventory):
+        """Gets all the users in the database
+
+        :param inventory: inventory object of the application
+        :return: list of user objects 
+        """
         users = []
         users_dict = self.__get_data(self.USER_TBL_FILE_NAME)
         for user in users_dict:

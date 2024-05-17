@@ -52,7 +52,7 @@ class CustomerController():
             pass
 
     def cart_operation_displat(self):
-        print("\nCheck out\n [1]Pay for a product\n [2]Quiz")
+        print("\nCheck out\n [1]Pay for a product\n [2]Quit")
 
     def customer_control(self):
         """Main control block for customer interface. Displays customer home menu
