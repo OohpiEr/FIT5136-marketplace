@@ -1,14 +1,17 @@
 from domain.ShoppingCart import ShoppingCart
+from domain.User import User
 
-class Customer:
+
+class Customer(User):
     """Customer class"""
-    def __init__(self,inventory):
+
+    def __init__(self, id, email, password, inventory):
         """Constructor
 
         :param inventory: Inventory object. Inventory of the application.
         """
-        self.inventory = inventory
         self.shopping_cart = ShoppingCart()
+        super().__init__(id, email, password, inventory)
 
     def get_all_products(self):
         """Gets all products the customer has access to

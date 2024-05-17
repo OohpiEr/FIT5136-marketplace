@@ -6,13 +6,13 @@ from domain.Customer import Customer
 class CustomerController():
     """Controller class for customer interface. Contains the logic for customer interface."""
 
-    def __init__(self, inventory):
+    def __init__(self, customer):
         """Constructor
 
         :param inventory: inventory object for the application
         """
         self.ui = CustomerInterface()
-        self.customer = Customer(inventory)
+        self.customer = customer
 
     def __check_input(self, input):
         """Check if input is valid

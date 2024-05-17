@@ -7,13 +7,13 @@ from domain.Admin import Admin
 class AdminController():
     """Controller class for administration interface. Contains logic for admin interface."""
 
-    def __init__(self, inventory):
+    def __init__(self, admin):
         """Constructor
 
         :param inventory: inventory object for the application
         """
         self.ui = AdminInterface()
-        self.admin = Admin(inventory)
+        self.admin = admin
 
     def admin_control(self):
         """Starting point of the admin interface. Displays the admin home menu

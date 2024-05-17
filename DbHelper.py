@@ -1,4 +1,6 @@
 import csv
+from domain import Customer
+from domain import Admin
 from domain import Product
 from domain import Category
 from domain import SubCategory
@@ -42,6 +44,22 @@ class DbHelper:
                 subcategory = subcat
 
         return subcategory
+
+    @classmethod
+    def get_all_users(self, inventory):
+        users = []
+        users_dict = self.__get_data(self.USER_TBL_FILE_NAME)
+        for user in users_dict:
+            user_id = user["user_id"]
+            match user_id:
+                case "1":
+                    users.append(Admin.Admin(int(user_id), user["user_email"], user["user_pass"], inventory))
+                case "2":
+                    users.append(Customer.Customer(int(user_id), user["user_email"], user["user_pass"], inventory))
+        
+        return users
+            
+            
 
     @classmethod
     def get_all_products(self, subcategories):

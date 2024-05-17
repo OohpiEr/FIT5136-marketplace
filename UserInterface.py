@@ -32,6 +32,7 @@ class UserInterface():
         print("")
         print("     PLEASE SELECT AN OPTION")
         print("       [1] Login")
+        print("       [q] Quit")
         print("")
         print("")
 

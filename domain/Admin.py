@@ -1,12 +1,15 @@
-class Admin:
+from domain.User import User
+
+
+class Admin(User):
     """Admin class."""
 
-    def __init__(self, inventory):
+    def __init__(self, id, email, password, inventory):
         """Constructor
 
         :param inventory: Inventory object for the application.
         """
-        self.inventory = inventory
+        super().__init__(id, email, password, inventory)
 
     def add_product(self, name, brand, description, quantity, sub_category_id, og_price, member_price):
         """Adds a product to the inventory

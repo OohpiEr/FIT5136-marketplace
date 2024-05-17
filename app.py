@@ -1,18 +1,20 @@
-from Login import Login
+from LoginController import LoginController
 from domain.Inventory import Inventory
+from DbHelper import DbHelper as db
 
 
 class App:
     """Application class."""
-    inventory = Inventory()
     EXIT_CODE = -1
 
     def __init__(self):
-        self.login = Login()
+        self.inventory = Inventory()
+        self.__users = db.get_all_users(self.inventory)
+        self.login = LoginController()
 
     def start(self):
         """Start the application."""
-        self.login.login_control(self.inventory)
+        self.login.login_control(self.__users)
 
 
 if __name__ == "__main__":
