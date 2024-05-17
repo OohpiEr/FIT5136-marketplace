@@ -44,7 +44,7 @@ class AdminController():
                         self.update_product()
                         display_menu = True
                     case '4':
-                        self.borwse_item()
+                        self.browse_item()
                         display_menu = True
                     case "q":
                         return
@@ -117,7 +117,7 @@ class AdminController():
 
         self.ui.display_result_msg(f"Product added:\n" + str(product))
 
-    def borwse_item(self):
+    def browse_item(self):
         self.admin.show_product()
         # print(" Please input the way of browse item:")
         # product_title = []
