@@ -8,7 +8,8 @@ class Inventory:
 
     @property
     def products(self):
-        return self.__products
+        return db.get_all_products(self.__subcategories)
+        #return self.__products
 
     @property
     def categories(self):
