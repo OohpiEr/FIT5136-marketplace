@@ -118,6 +118,9 @@ class AdminController():
         self.ui.display_result_msg(f"Product added:\n" + str(product))
 
     def browse_item(self):
+        """
+        Browsing all items in Inventory for admin
+        """
         self.admin.show_product()
         # print(" Please input the way of browse item:")
         # product_title = []

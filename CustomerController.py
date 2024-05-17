@@ -27,8 +27,11 @@ class CustomerController():
         self.customer.add_to_cart(product)
 
     def view_shopping_cart(self):
-        self.customer.view_shopping_cart()
-        self.cart_operation_displat()
+        """
+        Check out after customer viewing cart and making the option
+        """
+        self.customer.view_shopping_cart()  # viewing cart
+        self.cart_operation_display()  # display options
         select = input("Please input your option:\n")
         if select == '1':
             order_list = []
@@ -51,7 +54,10 @@ class CustomerController():
         else:
             pass
 
-    def cart_operation_displat(self):
+    def cart_operation_display(self):
+        """
+        Display options after Customer viewing the cart
+        """
         print("\nCheck out\n [1]Pay for a product\n [2]Quit")
 
     def customer_control(self):
@@ -147,6 +153,3 @@ class CustomerController():
                         raise UserInputError
             except UserInputError as e:
                 print("Invalid input.")
-
-    def pay_product(self,):
-        pass
