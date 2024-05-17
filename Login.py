@@ -10,22 +10,12 @@ or purchases to fulfil the purpose of the Monash Merchant Marketplace. The login
 email and password, and verifies whether the account user/holder exists in the database, to be able to login
 safely and securely to the owner's account. The only users are an administrator and customer, from which
 will use credentials from the provided information.
-
-Administrator email: admin@merchant.monash.edu
-Administrator password: 12345678
-
-Customer email: member@student.monash.edu
-Customer password: Monash1234
-
 """
 
 
 from UserInterface import UserInterface
 from AdminController import AdminController
 from CustomerController import CustomerController
-# from domain.Admin import Admin
-# from domain.Customer import Customer
-# import csv
 
 
 class Login:
@@ -38,25 +28,23 @@ class Login:
         main_choice = "Enter your choice, or 'Q' to Quit: "
         wrong_choice = "Please enter a valid menu option"
         incorrect_login = "Your entered details are not the correct email or password"
-        
+
         ui_obj = UserInterface()
         ui_obj.display_landing_page()
-
 
         while True:
             user_choice = input(main_choice).strip().upper()
             if user_choice == "1":
                 user_choice_email = input("      # Email: ").strip()
                 user_choice_password = input("      # Password: ").strip()
-                login_attempt = self.login(user_choice_email, user_choice_password)
+                login_attempt = self.login(
+                    user_choice_email, user_choice_password)
 
                 if login_attempt:
                     if user_choice_email == admin_email:
                         admin_controller = AdminController(inventory)
                         admin_controller.admin_control()
                     elif user_choice_email == customer_email:
-                        # ui_obj.display_customer_menu()
-                        # self.customer_control()
                         cust_controller = CustomerController(inventory)
                         cust_controller.customer_control()
                     break  # 登录成功，退出循环
@@ -66,8 +54,6 @@ class Login:
                 break  # 用户选择退出，退出循环
             else:
                 print(wrong_choice)
-
-
 
     def login(self, username, password):
         admin_email_2 = "admin@merchant.monash.edu"
@@ -92,7 +78,3 @@ class Login:
             print("Error opening and reading from file. Make sure it exists")
         except EOFError:
             print("No data found in the file. Please check contents")
-
-
-
-

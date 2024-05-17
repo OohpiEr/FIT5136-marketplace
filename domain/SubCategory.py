@@ -15,3 +15,13 @@ class SubCategory():
     @property
     def category(self):
         return self.__category
+
+    def __str__(self):
+        """To string method
+
+        :return: String displaying subcategory.
+        """
+        return "id = {}\nname = {}\nsubcategories = {}".format(
+            self.__id,
+            self.__name,
+            self.__category.name)

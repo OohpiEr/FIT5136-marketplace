@@ -1,6 +1,8 @@
 from UserInterface import UserInterface
 
+
 class AdminInterface(UserInterface):
+    """ User interface for admin"""
     ADMIN_HOME_BANNER = """
   _||____________________________________________||_
 (__  ____________________________________________  __)
@@ -15,12 +17,20 @@ class AdminInterface(UserInterface):
 (__  ____________________________________________  __)
    ||                                            ||"""
 
-    ADMIN_HOME_OPTIONS = [("1","Add Item"), ("2", "Delete Item"), ("3", "Edit Item"),("4", "Browse Item"), ("q", "Quit")]
-    
+    ADMIN_HOME_OPTIONS = [("1", "Add Item"), ("2", "Delete Item"),
+                          ("3", "Edit Item"), ("4", "Browse Item"), ("q", "Quit")]
+
     def __init__(self) -> None:
+        """Constructor"""
         super().__init__()
-    
+
     def __display(self, banner, options, option_prompt):
+        """Private method to display default banner, options and option prompt style display
+
+        :param banner: banner string
+        :param options: list of tuple containing options to display in the form of (option, option description) 
+        :param option_prompt: prompt string to ask for option selection
+        """
         print(banner, "\n\n", option_prompt)
         for option in options:
             print(f"{self.TAB}[{option[0]}] {option[1]}")
@@ -28,32 +38,10 @@ class AdminInterface(UserInterface):
         print(self.INPUT_PROMPT)
 
     def display_home(self):
-        self.__display(self.ADMIN_HOME_BANNER, self.ADMIN_HOME_OPTIONS, self.OPTION_PROMPT)
-        return self.ADMIN_HOME_OPTIONS
-        
-    # def display_home(self):
-    #     options = ["1", "2", "3", "q"]
-        
-    #     print("  _||____________________________________________||_")
-    #     print("(__  ____________________________________________  __)")
-    #     print("   ||                                            ||")
-    #     print("   ||              -- MONASH SHOP --             ||")
-    #     print("   ||                                            ||")
-    #     print("   ||                   [ADMIN]                  ||")
-    #     print("   ||                                            ||")
-    #     print("   ||                                            ||")
-    #     print("   ||                                            ||")
-    #     print("  _||____________________________________________||_")
-    #     print("(__  ____________________________________________  __)")
-    #     print("   ||                                            ||")
-    #     print("")
-    #     print("")
-    #     print(self.TAB, self.OPTION_PROMPT)
-    #     print("       [1] Browse products (delete items)")
-    #     print("       [2] Add product/categories")
-    #     print("       [3] Update product")
-    #     print("       [q] Quit")
-    #     print("")
-    #     print(self.INPUT_PROMPT)
+        """display the home screen
 
-    #     return options
+        :return: list of tuple containing options displayed in the form of (option, option description)
+        """
+        self.__display(self.ADMIN_HOME_BANNER,
+                       self.ADMIN_HOME_OPTIONS, self.OPTION_PROMPT)
+        return self.ADMIN_HOME_OPTIONS

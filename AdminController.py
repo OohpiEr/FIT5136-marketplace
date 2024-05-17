@@ -5,12 +5,21 @@ from domain.Admin import Admin
 
 
 class AdminController():
+    """Controller class for administration interface. Contains logic for admin interface."""
+
     def __init__(self, inventory):
-        # super().__init__()
+        """Constructor
+
+        :param inventory: inventory object for the application
+        """
         self.ui = AdminInterface()
         self.admin = Admin(inventory)
 
     def admin_control(self):
+        """Starting point of the admin interface. Displays the admin home menu
+
+        :raises UserInputError: Error when the user input is invalid
+        """
         # [("1","Add Item"), ("2", "Delete Item"), ("3", "Edit Item"), ("q", "Quit")]
         quit_flag = False
         display_menu = True
@@ -46,6 +55,7 @@ class AdminController():
                 self.ui.display_result_msg("Invalid input.")
 
     def delete_product(self):
+        """Logic for the delete product functionality."""
         product_id = input(
             "Please enter the product ID you wish to delete: ").strip()
         msg = ""
@@ -82,6 +92,10 @@ class AdminController():
                                   member_price)
 
     def add_product(self):
+        """Logic for adding products.
+
+        :raises UserInputError: Error when user input is invalid
+        """
         name = input(
             "Please enter the name of the product you wish to add: ").strip()
         brand = input("Please enter the brand of the product: ").strip()

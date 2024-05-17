@@ -1,4 +1,5 @@
 class UserInterface():
+    """User interface class for displaying the user interface"""
     TAB = "     "
     OPTION_PROMPT = "PLEASE SELECT AN OPTION"
     INPUT_PROMPT = "INPUT:"
@@ -6,11 +7,15 @@ class UserInterface():
     QUIT_OPTION = ("q", "Quit")
 
     def display_result_msg(self, msg):
+        """Display the result message. Waits for user input to continue
+
+        :param msg: message to display
+        """
         print(self.NEWLINE, self.NEWLINE, msg, self.NEWLINE, self.NEWLINE)
         input("Enter to continue...")
 
-
     def display_landing_page(self):
+        """Displays the landing page"""
         print("  _||____________________________________________||_")
         print("(__  ____________________________________________  __)")
         print("   ||                                            ||")
@@ -31,6 +36,7 @@ class UserInterface():
         print("")
 
     def display_login_page(self):
+        """Displays the login page"""
         print(" _____________________________________________________")
         print("|  _________________________________________________  |")
         print("| |                                                 | |")

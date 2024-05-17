@@ -6,7 +6,11 @@ from RowNotFoundError import RowNotFoundError
 
 
 class DbHelper:
-    db_path = "db"
+    """Static Database helper class. Used to connect to the physical database.
+
+    :raises RowNotFoundError: Raised when the row is not found in the database
+    """
+    DB_PATH = "db"
     CATEGORY_TBL_FILE_NAME = "category.txt"
     CUSTOMER_TBL_FILE_NAME = "customer.txt"
     PRODUCT_TBL_FILE_NAME = "product.txt"
@@ -15,12 +19,23 @@ class DbHelper:
 
     @classmethod
     def __get_data(self, filename):
-        with open(f"{self.db_path}/{filename}", mode="r", encoding="UTF-8") as f:
+        """Gets the data from a csv file
+
+        :param filename: filename
+        :return: a list of dictionary objects containing the data in the file
+        """
+        with open(f"{self.DB_PATH}/{filename}", mode="r", encoding="UTF-8") as f:
             data = list(csv.DictReader(f, delimiter=','))
             return data
 
     @classmethod
     def __get_subcategory(self, subcategory_id, subcategories):
+        """Gets the subcategory object from the inventory.
+
+        :param subcategory_id: subcategory id
+        :param subcategories: list of subcategory objects in the inventory
+        :return: subcategory object
+        """
         subcategory = None
         for subcat in subcategories:
             if subcategory_id == subcat.id:
@@ -30,6 +45,12 @@ class DbHelper:
 
     @classmethod
     def get_all_products(self, subcategories):
+        """Gets all products from the database
+
+        :param subcategories: list of subcategories in the inventory
+        :raises RowNotFoundError: raised when the row is not found
+        :return: list of product objects in the database
+        """
         product_dict_list = self.__get_data(self.PRODUCT_TBL_FILE_NAME)
         products = []
 
@@ -57,6 +78,10 @@ class DbHelper:
 
     @classmethod
     def get_all_categories(self):
+        """Gets all the categories in the database
+
+        :return: list of category objects
+        """
         cat_dict_list = self.__get_data(self.CATEGORY_TBL_FILE_NAME)
         subcat_dict_list = self.__get_data(self.SUBCATEGORY_TBL_FILE_NAME)
         subcategories = []
@@ -90,18 +115,36 @@ class DbHelper:
 
     @classmethod
     def __get_new_id(self, file):
+        """Gets the new id for a table (csv file)
+
+        :param file: filename string    
+        :return: new integer id of the table
+        """
         *_, last_row = csv.reader(file, delimiter=',')
         new_id = int(last_row[0]) + 1
         return new_id
 
     @classmethod
     def add_product(self, name, brand, description, quantity, subcategory_id, og_price, member_price, subcategories):
+        """Add a product to the database
+
+        :param subcategories: _description_
+        :param name: product name
+        :param brand: product brand
+        :param description: product description
+        :param quantity: product quantity
+        :param subcategory_id: product subcategory id
+        :param og_price: product price
+        :param member_price: product member price
+        :raises RowNotFoundError: raised when row is not found in the database
+        :return: product object of the product added
+        """
         subcategory = self.__get_subcategory(subcategory_id, subcategories)
-        
+
         if subcategory == None:
             raise RowNotFoundError("Subcategory not found.")
-        
-        with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", 'r+', newline="") as f:
+
+        with open(f"{self.DB_PATH}/{self.PRODUCT_TBL_FILE_NAME}", 'r+', newline="") as f:
             product_id = self.__get_new_id(f)
             product = Product.Product(
                 product_id, name, brand, description, quantity, subcategory, og_price, member_price)
@@ -115,9 +158,14 @@ class DbHelper:
 
     @classmethod
     def delete_product(self, product_id):
+        """Delete a product from the database
+
+        :param product_id: product id to be deleted
+        :raises RowNotFoundError: raised when product is not found in the database
+        """
         deleted = False
         prod_list = []
-        with open(f"{self.db_path}/{self.PRODUCT_TBL_FILE_NAME}", 'r+', newline='') as f:
+        with open(f"{self.DB_PATH}/{self.PRODUCT_TBL_FILE_NAME}", 'r+', newline='') as f:
             reader = csv.reader(f, delimiter=',')
             # lines = f.readlines()
             for line in reader:
@@ -169,7 +217,7 @@ class DbHelper:
                 data[index]['product_member_price'] = member_price
 
             # write in the file
-            with open(f"{cls.db_path}/{cls.PRODUCT_TBL_FILE_NAME}", mode="w", newline='', encoding="UTF-8") as f:
+            with open(f"{cls.DB_PATH}/{cls.PRODUCT_TBL_FILE_NAME}", mode="w", newline='', encoding="UTF-8") as f:
                 fieldnames = data[0].keys()
                 writer = csv.DictWriter(f, fieldnames=fieldnames)
 
@@ -178,12 +226,3 @@ class DbHelper:
 
             return True
         return False
-
-
-
-if __name__ == "__main__":
-    db = DbHelper()
-    # p = Product.Product(7, "name", "brand", "description", 10, 6.9, 5, 11)
-    db.get_all_categories()
-    # db.add_product("Colgate Total Charcoal Deep Clean Toothpaste", "Colgate",
-    #    "Colgate Total Antibacterial Fluoride toothpaste has a unique formula that keeps your whole mouth healthy by fighting bacteria on teeth, tongue, cheeks, and gums for 12 hours*. Colgate Total Charcoal Deep Clean, active cleaning formula fights plaque even between teeth and hard to reach spaces", 10, 6.9, 5, 11)
