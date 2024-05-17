@@ -63,12 +63,15 @@ class AdminController():
 
     def update_product(self):
         self.admin.show_product()
-        product_id = input("Please enter the product ID you wish to update: ").strip()
+        product_id = input(
+            "Please enter the product ID you wish to update: ").strip()
         name = input("Enter new name (leave blank to keep current): ").strip()
-        brand = input("Enter new brand (leave blank to keep current): ").strip()
+        brand = input(
+            "Enter new brand (leave blank to keep current): ").strip()
         description = input(
             "Enter new description (leave blank to keep current): ").strip()
-        quantity = input("Enter new quantity (leave blank to keep current): ").strip()
+        quantity = input(
+            "Enter new quantity (leave blank to keep current): ").strip()
         sub_category_id = input(
             "Enter new sub-category ID (leave blank to keep current): ").strip()
         og_price = input(
@@ -91,68 +94,70 @@ class AdminController():
             "Please input the full price for the product: ").strip()
         member_price = input(
             "Please enter the membership price of the product available to members: ").strip()
-        
+
         try:
             product = self.admin.add_product(name, brand, description, int(
                 quantity), int(sub_category_id), float(og_price), float(member_price))
         except ValueError as e:
             raise UserInputError
-            
+
         self.ui.display_result_msg(f"Product added:\n" + str(product))
+
     def borwse_item(self):
         print(" Please input the way of browse item:")
         product_title = []
         product_list = []
-        category_list=[]
+        category_list = []
         category_title = []
-        print("     [1]category\n     [2]brand\n     [3]view all items\n     [4]Quit\n")
-        with open('db/product.txt','r') as f:
-            product_title = f.readline().replace("\n","").split(",")
-            item = f.readline().replace("\n","")
-            while len(item)>0:
+        print(
+            "     [1]category\n     [2]brand\n     [3]view all items\n     [4]Quit\n")
+        with open('db/product.txt', 'r') as f:
+            product_title = f.readline().replace("\n", "").split(",")
+            item = f.readline().replace("\n", "")
+            while len(item) > 0:
                 product_list.append(item.split(","))
-                item=f.readline().replace("\n","")
-        with open('db/subcategory.txt','r') as f:
-            category_title = f.readline().replace("\n","").split(",")
+                item = f.readline().replace("\n", "")
+        with open('db/subcategory.txt', 'r') as f:
+            category_title = f.readline().replace("\n", "").split(",")
             item = f.readline()
-            while len(item)>0:
-                category_list.append(item.replace("\n","").split(","))
-                item=f.readline().replace("\n","")
+            while len(item) > 0:
+                category_list.append(item.replace("\n", "").split(","))
+                item = f.readline().replace("\n", "")
         check_type = input(" Enter your choice:")
-        if check_type=='1':
-            category_id=None
+        if check_type == '1':
+            category_id = None
             category_name = input("Please input the category:")
             for category_item in category_list:
-                if category_item[1]==category_name:
-                    category_id=category_item[0]
+                if category_item[1] == category_name:
+                    category_id = category_item[0]
                     break
-            if category_id!=None:
+            if category_id != None:
                 output_data = []
                 for item in product_list:
-                    if item[-1]==category_id:
-                        print(output_data.append([item[i] for i in [0,1,4]]))
-                if len(output_data)>0:
-                    print("\t".join([product_title[i] for i in [0,1,4]]))
+                    if item[-1] == category_id:
+                        print(output_data.append([item[i] for i in [0, 1, 4]]))
+                if len(output_data) > 0:
+                    print("\t".join([product_title[i] for i in [0, 1, 4]]))
                     for item in output_data:
                         print("\t".join(item))
                 else:
                     print("There is no product!")
-        elif check_type=='2':
+        elif check_type == '2':
             output_data = []
             index = product_title.index("product_brand")
             brand_name = input("Please input the brand:")
             for item in product_list:
-                if item[index]==brand_name:
-                    output_data.append([item[i] for i in [0,1,4]])
+                if item[index] == brand_name:
+                    output_data.append([item[i] for i in [0, 1, 4]])
             if len(output_data) > 0:
                 print("\t".join([product_title[i] for i in [0, 1, 4]]))
                 for item in output_data:
                     print("\t".join(item))
             else:
                 print("There is no product!")
-        elif check_type=='3':
+        elif check_type == '3':
             print("\t".join([product_title[i] for i in [0, 1, 4]]))
             for item in product_list:
                 print("\t".join([item[i] for i in [0, 1, 4]]))
-        elif check_type=='4':
+        elif check_type == '4':
             return

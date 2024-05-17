@@ -4,6 +4,7 @@ from DbHelper import DbHelper as db
 class Inventory:
     def __init__(self):
         self.__categories, self.__subcategories = db.get_all_categories()
+        temp = db.get_all_products(self.__subcategories)
         self.__products = db.get_all_products(self.__subcategories)
 
     @property
@@ -21,13 +22,10 @@ class Inventory:
     
     def add_product(self, name, brand, description, quantity, sub_category_id, og_price, member_price):
         product = db.add_product(name, brand, description, quantity, sub_category_id, og_price, member_price, self.__subcategories)
-        self.__products.append(product)
         return product
 
     def delete_product(self, product_id):
         db.delete_product(product_id)
-        i, product = self.__get_product(product_id)
-        self.__products.pop(i)
 
     def __get_product(self, product_id):
         for i, product in enumerate(self.__products):
